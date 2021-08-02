@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import LoginForm from "../../modules/LoginPageModules/LoginForm/LoginForm";
+import LoginForm from "../../../modules/LoginPageModules/LoginForm/LoginForm";
 import "./EmployeeLoginPage.css";
 
 export default class EmployeeLoginPage extends Component {
