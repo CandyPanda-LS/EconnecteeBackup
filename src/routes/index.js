@@ -5,6 +5,8 @@ import EmployeeLoginPage from "../pages/Employee/EmployeeLoginPage/EmployeeLogin
 import AdminRegistrationPage from "../pages/Admin/AdminRegistrationPage/AdminRegistrationPage";
 import AdminLoginPage from "../pages/Admin/AdminLoginPage/AdminLoginPage";
 import PMLoginPage from "../pages/ProjectManager/PMLoginPage/PMLoginPage";
+import EditProfile from "../pages/Employee/EditProfilePage/EditProfile";
+import AddEmployeePage from "../pages/Admin/AddEmployeePage/AddEmployeePage";
 
 export default class index extends Component {
   render() {
@@ -15,7 +17,9 @@ export default class index extends Component {
           <Route path="/" exact component={EmployeeLoginPage} />
           <Route path="/adminlogin" exact component={AdminLoginPage} />
           <Route path="/adminregister" exact component={AdminRegistrationPage} />
+          <Route path="/addemployee" exact component={AddEmployeePage} />
           <Route path="/pmlogin" exact component={PMLoginPage} />
+          <Route path="/editProfile" exact component={EditProfile} />
         </Router>
       </div>
     );
