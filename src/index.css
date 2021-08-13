@@ -23,3 +23,10 @@ a {
   -moz-box-shadow: 6px 6px 9px -4px rgba(0,0,0,0.75);
   box-shadow: 6px 6px 9px -4px rgba(0,0,0,0.75);
 }
+
+.modalCreateBtn{
+  background-color: #087E8B;
+  border-radius: 15px;
+  min-width: 100px;
+  color: #FFFFFF;
+}
