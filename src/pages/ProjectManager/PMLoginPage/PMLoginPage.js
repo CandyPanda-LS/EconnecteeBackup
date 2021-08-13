@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginForm from "../../../modules/LoginPageModules/LoginForm/LoginForm";
+import LoginForm from '../../../modules/LoginPageModules/LoginForm/LoginForm';
 
 class PMLoginPage extends Component {
     render() {
@@ -11,7 +11,7 @@ class PMLoginPage extends Component {
                   <h1>Back</h1>
                   <p>Please login to our system</p>
               </div>
-              <div className="col-md-4 loginPageColTwo p-5"><LoginForm/></div>
+              <div className="col-md-4 loginPageColTwo p-5"><LoginForm role="PROJECT MANAGER"/></div>
             </div>
         </div>
       );
