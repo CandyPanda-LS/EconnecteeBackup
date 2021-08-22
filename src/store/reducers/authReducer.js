@@ -1,10 +1,10 @@
 import { ACTION_TYPES } from "../actions/authActions";
 
-const user = JSON.parse(localStorage.getItem("user"));
+const token = localStorage.getItem("x-auth-token");
 
-const initialState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
+const initialState = token
+  ? { isLoggedIn: true, token }
+  : { isLoggedIn: false, token: null };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +12,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        user: action.payload,
+        token: action.payload,
       };
     case ACTION_TYPES.REGISTER_FAIL:
       return {
@@ -23,19 +23,19 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        user: action.payload,
+        token: action.payload,
       };
     case ACTION_TYPES.LOGIN_FAIL:
       return {
         ...state,
         isLoggedIn: false,
-        user: null,
+        token: null,
       };
     case ACTION_TYPES.LOGOUT:
       return {
         ...state,
         isLoggedIn: false,
-        user: null,
+        token: null,
       };
     default:
       return state;

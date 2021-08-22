@@ -1,8 +1,76 @@
 import React, { Component } from "react";
 import "./AddEmployeeForm.css";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions/EmployeeActions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Button, Form, FormGroup, Input } from "reactstrap";
 
 export class AddEmployeeForm extends Component {
+  constructor(props) {
+    super(props);
+    this.onRegistration = this.onRegistration.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
+    this.state = {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      mobileNumber: "",
+      department: ""
+    };
+  }
+
+  onValueChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onRegistration(e) {
+    e.preventDefault();
+
+    if (this.state.password === this.state.confirmPassword) {
+
+      let rate = 1000;
+
+      if(this.state.department === "Development"){
+        rate = 2000;
+      }else if(this.state.department === "Marketing"){
+        rate = 1500;
+      }else{
+        rate = 1000;
+      }
+
+      const registrationObj = {
+        email: this.state.email,
+        password: this.state.password,
+        name: this.state.name,
+        username: this.state.username,
+        mobileNumber: this.state.mobileNumber,
+        department:this.state.department,
+        rate
+      };
+      this.props.employeeRegister(
+        registrationObj,
+        () => {
+          toast.success('Employee Registration Success', {
+            autoClose: 1000,
+          });
+        },
+        () => {
+          toast.error('Something went wrong', {
+            autoClose: 1000,
+          });
+        }
+      );
+    } else {
+      toast.error('Password mismatch', {
+        autoClose: 1000,
+      });
+    }
+
+  }
+
   render() {
     return (
       <div>
@@ -12,21 +80,16 @@ export class AddEmployeeForm extends Component {
               <h5>EMPLOYEE REGISTRATION !</h5>
             </div>
             <div className="container mt-3">
-              <Form>
+              <Form onSubmit={this.onRegistration}>
                 <FormGroup className="mt-3">
                   <Input
                     type="text"
-                    name="fullName"
-                    id="fullName"
+                    name="name"
+                    id="name"
                     placeholder="Full Name"
-                  />
-                </FormGroup>
-                <FormGroup className="mt-3">
-                  <Input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
+                    onChange={(e) => {
+                      this.onValueChange(e);
+                    }}
                   />
                 </FormGroup>
                 <FormGroup className="mt-3">
@@ -35,6 +98,20 @@ export class AddEmployeeForm extends Component {
                     name="username"
                     id="username"
                     placeholder="Username"
+                    onChange={(e) => {
+                      this.onValueChange(e);
+                    }}
+                  />
+                </FormGroup>
+                <FormGroup className="mt-3">
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    onChange={(e) => {
+                      this.onValueChange(e);
+                    }}
                   />
                 </FormGroup>
                 <FormGroup className="mt-3">
@@ -43,28 +120,43 @@ export class AddEmployeeForm extends Component {
                     name="password"
                     id="password"
                     placeholder="Password"
+                    onChange={(e) => {
+                      this.onValueChange(e);
+                    }}
                   />
                 </FormGroup>
                 <FormGroup className="mt-3">
                   <Input
                     type="password"
-                    name="cpassword"
-                    id="cpassword"
+                    name="confirmPassword"
+                    id="confirmPassword"
                     placeholder="Confirm password"
+                    onChange={(e) => {
+                      this.onValueChange(e);
+                    }}
                   />
                 </FormGroup>
                 <FormGroup className="mt-3">
-                <Input type="select" name="position" id="position">
-                  <option>Select the Position</option>
-                  <option value="Intern Software Engineer">Intern Software Engineer</option>
-                  <option value="Software Engineer">Software Engineer</option>
-                  <option value="Senior Software Engineer">Senior Software Engineer</option>
-                  <option value="Business Analyst">Business Analyst</option>
-                  <option value="Business Analyst">Intern Quality Engineer</option>
-                  <option value="Business Analyst">Quality Engineer</option>
-                </Input>
+                  <Input type="select" name="department" id="department" onChange={(e) => {
+                    this.onValueChange(e);
+                  }} >
+                    <option>Select the Department</option>
+                    <option value="Development">Development</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Quality Assurance">Quality Assurance</option>
+                  </Input>
                 </FormGroup>
-
+                <FormGroup className="mt-3">
+            <Input
+              type="text"
+              name="mobileNumber"
+              id="mobileNumber"
+              placeholder="Mobile Number"
+              onChange={(e) => {
+                this.onValueChange(e);
+              }}
+            />
+          </FormGroup>
                 <FormGroup className="mt-4 mb-3">
                   <Button className="loginBtn">Register</Button>
                 </FormGroup>
@@ -72,9 +164,14 @@ export class AddEmployeeForm extends Component {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }
 }
 
-export default AddEmployeeForm;
+const mapActionToProps = {
+  employeeRegister: actions.employeeRegister
+};
+
+export default connect(null, mapActionToProps)(AddEmployeeForm);

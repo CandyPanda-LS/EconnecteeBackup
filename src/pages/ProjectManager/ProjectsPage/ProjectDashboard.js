@@ -12,7 +12,7 @@ export default class ProjectDashboard extends Component {
               <ProjectDashboardHeader />
             </div>
             <div className="col-lg-12">
-              <ProjectCardSection />
+              <ProjectCardSection/>
             </div>
           </div>
         </div>

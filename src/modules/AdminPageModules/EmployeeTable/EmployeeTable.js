@@ -1,7 +1,49 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions/EmployeeActions";
 import "./EmployeeTable.css";
+import ProfileImage from "../../../assets/images/profile.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import EditEmployeeForm from "../EditEmployeeForm/EditEmployeeForm";
 
-export class EmployeeTable extends Component {
+class EmployeeTable extends Component {
+  constructor(props) {
+    super(props);
+    this.onRemoveEmployee = this.onRemoveEmployee.bind(this);
+    this.state = {
+      modalEditEmployee: false,
+      singleEmployeeObject: null,
+    };
+  }
+
+  componentDidMount() {
+    this.props.fetchAllEmployeeList();
+  }
+
+  toggleEditEmployee = () => {
+    this.setState({
+      modalEditEmployee: !this.state.modalEditEmployee,
+    });
+  };
+
+  onRemoveEmployee(employeeId) {
+    this.props.deleteEmployee(
+      employeeId,
+      () => {
+        toast.success("Employee delete Success", {
+          autoClose: 1000,
+        });
+      },
+      () => {
+        toast.error("Something went wrong", {
+          autoClose: 1000,
+        });
+      }
+    );
+  }
+
   render() {
     return (
       <div className="card boderRadiusCards">
@@ -10,7 +52,7 @@ export class EmployeeTable extends Component {
             <thead>
               <tr className="empTableHeader">
                 <th scope="col">#</th>
-                <th scope="col">Employee ID</th>
+                <th scope="col">Username</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Image</th>
@@ -19,94 +61,86 @@ export class EmployeeTable extends Component {
               </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DEV001</td>
-                <td>Senura Jayadeva</td>
-                <td>senurajayadeva@gmail.com</td>
-                <td><img className="img-fluid rounded-circle employeeImage" src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png" alt="profile image2" /></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-gear-fill"></i></button></td>
-                <td><button className="btn  empTableBtn" style={{backgroundColor:"#087E8B",color:"white"}}><i class="bi bi-trash-fill"></i></button></td>
-              </tr>
+              {this.props.employeeList.map((singleEmployee, index) => {
+                return (
+                  <tr>
+                    <th scope="row">{++index}</th>
+                    <td>{singleEmployee.username}</td>
+                    <td>{singleEmployee.name}</td>
+                    <td>{singleEmployee.email}</td>
+                    <td>
+                      <img
+                        className="img-fluid rounded-circle employeeImage"
+                        src={
+                          singleEmployee.profileImg
+                            ? singleEmployee.profileImg
+                            : ProfileImage
+                        }
+                        alt="profile image2"
+                      />
+                    </td>
+                    <td>
+                      <button
+                        className="btn  empTableBtn"
+                        style={{ backgroundColor: "#087E8B", color: "white" }}
+                        onClick={() => {
+                          this.setState({
+                            singleEmployeeObject: singleEmployee,
+                          });
+                          this.toggleEditEmployee();
+                        }}
+                      >
+                        <i class="bi bi-gear-fill"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="btn  empTableBtn"
+                        style={{ backgroundColor: "#087E8B", color: "white" }}
+                        onClick={() => {
+                          this.onRemoveEmployee(singleEmployee._id);
+                        }}
+                      >
+                        <i class="bi bi-trash-fill"></i>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
-        <br/>
+        <br />
+        <ToastContainer />
+        {/* Modals Section */}
+
+        {/* Edit Project Moda */}
+        <Modal
+          isOpen={this.state.modalEditEmployee}
+          toggle={this.toggleEditEmployee}
+        >
+          <ModalHeader toggle={this.toggleEditEmployee}>
+            EDIT EMPLOYEE
+          </ModalHeader>
+          <ModalBody>
+            <EditEmployeeForm
+              singleEmployee={this.state.singleEmployeeObject}
+            />
+          </ModalBody>
+        </Modal>
+
+        {/* End of Modals Section */}
       </div>
     );
   }
 }
 
-export default EmployeeTable;
+const mapStateToProps = (state) => ({
+  employeeList: state.employeeReducer.employeeList,
+});
+
+const mapActionToProps = {
+  fetchAllEmployeeList: actions.fetchAllEmployeeList,
+  deleteEmployee: actions.deleteEmployee,
+};
+export default connect(mapStateToProps, mapActionToProps)(EmployeeTable);

@@ -20,8 +20,8 @@ export default class EmployeeDashboardHeader extends Component {
                     </div>
                     <div className="col-lg-6 empDashboardUserDetailsTwo mt-2">
                       <h2>Hello</h2>
-                      <h6>Dilmi Palliyaguruge</h6>
-                      <h6 className="text-muted">PM001</h6>
+                      <h6>{this.props.projectManagerObj.name}</h6>
+                      <h6 className="text-muted">{this.props.projectManagerObj.username}</h6>
                       <h6 className="text-muted">Project Manager</h6>
                     </div>
                   </div>

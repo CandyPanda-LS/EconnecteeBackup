@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import './AdminRegistrationPage.css'
+import React, { Component } from 'react'
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/authActions";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Form, FormGroup, Input } from "reactstrap";
 
-class AdminRegistrationPage extends Component {
+class ProjectManagerRegistrationPage extends Component {
     constructor(props) {
         super(props);
         this.onRegistration = this.onRegistration.bind(this);
@@ -34,17 +33,16 @@ class AdminRegistrationPage extends Component {
                 password: this.state.password,
                 name: this.state.name,
                 username: this.state.username,
-                mobileNumber: this.state.mobileNumber
+                mobileNumber: this.state.mobileNumber,
+                rate:"2500"
             };
-
-            console.log(registrationObj)
-            this.props.adminRegister(
+            this.props.productManagerRegister(
                 registrationObj,
                 () => {
                     toast.success('Registration Success', {
                         autoClose: false,
                     });
-                    window.location = "/admindashboard";
+                    window.location = "/pmdashboard";
                 },
                 () => {
                     toast.error('Username or password incorrect. Please try again', {
@@ -69,7 +67,7 @@ class AdminRegistrationPage extends Component {
 
                             <div className="container text-center">
                                 <div className="container mb-3">
-                                    <h5>REGISTER HERE!</h5>
+                                    <h5>PROJECT MANAGER REGISTER HERE!</h5>
                                 </div>
                                 <div className="container mt-5">
                                     <Form onSubmit={this.onRegistration}>
@@ -125,7 +123,7 @@ class AdminRegistrationPage extends Component {
 }
 
 const mapActionToProps = {
-    adminRegister: actions.adminRegister
+    productManagerRegister: actions.productManagerRegister
 };
   
-export default connect(null, mapActionToProps)(AdminRegistrationPage);
+export default connect(null, mapActionToProps)(ProjectManagerRegistrationPage);

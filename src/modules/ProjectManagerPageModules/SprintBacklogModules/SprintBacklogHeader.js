@@ -34,7 +34,7 @@ export default class SprintBacklogHeader extends Component {
             Create Sprint
           </ModalHeader>
           <ModalBody>
-            <CreateSprintForm />
+            <CreateSprintForm projectId={this.props.projectId} />
           </ModalBody>
         </Modal>
         {/* End of Modals Section */}

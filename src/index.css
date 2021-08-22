@@ -30,3 +30,19 @@ a {
   min-width: 100px;
   color: #FFFFFF;
 }
+
+.loadingScreen{
+  height: 100vh;
+  padding: 15%;
+}
+
+.covertBtn{
+ cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .loadingScreen{
+    height: 100vh;
+    padding: 50% 15%;
+  }
+}

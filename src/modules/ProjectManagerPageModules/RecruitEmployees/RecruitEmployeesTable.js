@@ -1,6 +1,39 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as projectActions from "../../../store/actions/ProjectActions";
 
-export default class RecruitEmployeesTable extends Component {
+class RecruitEmployeesTable extends Component {
+  constructor(props) {
+    super(props);
+    this.OnAddEmployeeToProject = this.OnAddEmployeeToProject.bind(this);
+    this.state = {
+      existEmpArray:[]
+    }
+  }
+
+ componentDidMount(){
+    let localArray = [];
+    this.props.empListInProject.map((employee) => {
+      localArray.push(employee._id);
+    });
+    this.setState({existEmpArray:localArray});
+  }
+
+  OnAddEmployeeToProject(empId) {
+    const employeeObj = {
+      employee:{
+        _id: empId
+      }
+    };
+    console.log(employeeObj)
+    this.props.addEmployeeToProject(
+      this.props.projectId,
+      employeeObj,
+      () => {},
+      () => {}
+    );
+  }
+
   render() {
     return (
       <div>
@@ -14,38 +47,35 @@ export default class RecruitEmployeesTable extends Component {
                     <h5>Development</h5>
                   </div>
                 </div>
-                <table className="table table-hover">        
+                <table className="table table-hover">
                   <tbody>
-                        <tr>
-                        <td>1</td>
-                      <td>P001</td>
-                      <td>Senura Jayadeva</td>
-                      <td>
-                        <button className="btn btn-primary empTableBtn">
-                       <i class="bi bi-plus-lg"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                      <td>P001</td>
-                      <td>Senura Jayadeva</td>
-                      <td>
-                        <button className="btn btn-primary empTableBtn">
-                       <i class="bi bi-plus-lg"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                      <td>P001</td>
-                      <td>Senura Jayadeva</td>
-                      <td>
-                        <button className="btn btn-primary empTableBtn">
-                       <i class="bi bi-plus-lg"></i>
-                        </button>
-                      </td>
-                    </tr>
+                    {this.props.employeeList.map((employee, index) => {
+                      if (employee.department === "Development") {
+                        return (
+                          <tr>
+                            <td>{++index}</td>
+                            <td>{employee.username}</td>
+                            <td>{employee.name}</td>
+                            <td>
+                              {this.state.existEmpArray.includes(employee._id) ? (
+                                <button className="btn btn-danger empTableBtn">
+                                  <i class="bi bi-dash-lg"></i>
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn btn-primary empTableBtn"
+                                  onClick={() => {
+                                    this.OnAddEmployeeToProject(employee._id);
+                                  }}
+                                >
+                                  <i class="bi bi-plus-lg"></i>
+                                </button>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      }
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -61,26 +91,33 @@ export default class RecruitEmployeesTable extends Component {
                 </div>
                 <table className="table table-hover">
                   <tbody>
-                        <tr>
-                        <td>1</td>
-                      <td>P001</td>
-                      <td>Senura Jayadeva</td>
-                      <td>
-                        <button className="btn btn-primary empTableBtn">
-                       <i class="bi bi-plus-lg"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                      <td>P001</td>
-                      <td>Senura Jayadeva</td>
-                      <td>
-                        <button className="btn btn-primary empTableBtn">
-                       <i class="bi bi-plus-lg"></i>
-                        </button>
-                      </td>
-                    </tr>
+                    {this.props.employeeList.map((employee, index) => {
+                      if (employee.department === "Marketing") {
+                        return (
+                          <tr>
+                            <td>{++index}</td>
+                            <td>{employee.username}</td>
+                            <td>{employee.name}</td>
+                            <td>
+                              {this.state.existEmpArray.includes(employee._id)? (
+                                <button className="btn btn-danger empTableBtn">
+                                  <i class="bi bi-dash-lg"></i>
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn btn-primary empTableBtn"
+                                  onClick={() => {
+                                    this.OnAddEmployeeToProject(employee._id);
+                                  }}
+                                >
+                                  <i class="bi bi-plus-lg"></i>
+                                </button>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      }
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -96,26 +133,33 @@ export default class RecruitEmployeesTable extends Component {
                 </div>
                 <table className="table table-hover">
                   <tbody>
-                        <tr>
-                        <td>1</td>
-                      <td>P001</td>
-                      <td>Senura Jayadeva</td>
-                      <td>
-                        <button className="btn btn-primary empTableBtn">
-                       <i class="bi bi-plus-lg"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                      <td>P001</td>
-                      <td>Senura Jayadeva</td>
-                      <td>
-                        <button className="btn btn-primary empTableBtn">
-                       <i class="bi bi-plus-lg"></i>
-                        </button>
-                      </td>
-                    </tr>
+                    {this.props.employeeList.map((employee, index) => {
+                      if (employee.department === "Quality Assurance") {
+                        return (
+                          <tr>
+                            <td>{++index}</td>
+                            <td>{employee.username}</td>
+                            <td>{employee.name}</td>
+                            <td>
+                              {this.state.existEmpArray.includes(employee._id) ? (
+                                <button className="btn btn-danger empTableBtn">
+                                  <i class="bi bi-dash-lg"></i>
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn btn-primary empTableBtn"
+                                  onClick={() => {
+                                    this.OnAddEmployeeToProject(employee._id);
+                                  }}
+                                >
+                                  <i class="bi bi-plus-lg"></i>
+                                </button>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      }
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -126,3 +170,9 @@ export default class RecruitEmployeesTable extends Component {
     );
   }
 }
+
+const mapActionToProps = {
+  addEmployeeToProject: projectActions.addEmployeeToProject,
+};
+
+export default connect(null, mapActionToProps)(RecruitEmployeesTable);

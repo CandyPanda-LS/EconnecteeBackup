@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/authActions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Button, Form, FormGroup, Input } from "reactstrap";
 
 class LoginForm extends Component {
@@ -10,10 +12,7 @@ class LoginForm extends Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.state = {
       email: "",
-      password: "",
-      processStatus: false,
-      processStatusAlert: "",
-      processStatusMessage: "",
+      password: ""
     };
   }
 
@@ -24,67 +23,54 @@ class LoginForm extends Component {
   onLogin(e) {
     e.preventDefault();
 
-    this.setState({
-      processStatus: true,
-      processStatusAlert: "alert alert-warning",
-      processStatusMessage: "Please Wait...",
-    });
-
     const loginObj = {
       email: this.state.email,
       password: this.state.password,
     };
-    if(this.props.role === "EMPLOYEE"){
+    console.log(loginObj)
+    if (this.props.role === "EMPLOYEE") {
       this.props.employeeLogin(
         loginObj,
         () => {
-          this.setState({
-            processStatusAlert: "alert alert-success",
-            processStatusMessage: "Login successful",
+
+          toast.success('Login Success', {
+            autoClose: false,
           });
           window.location = "/employeedashboard";
         },
         () => {
-          this.setState({
-            processStatusAlert: "alert alert-danger",
-            processStatusMessage:
-              "Username or password incorrect. Please try again.",
+          toast.error('Username or password incorrect. Please try again', {
+            autoClose: false,
           });
         }
       );
-    }else if(this.props.role === "ADMIN"){
+    } else if (this.props.role === "ADMIN") {
       this.props.adminLogin(
         loginObj,
         () => {
-          this.setState({
-            processStatusAlert: "alert alert-success",
-            processStatusMessage: "Login successful",
+          toast.success('Login Success', {
+            autoClose: false,
           });
           window.location = "/admindashboard";
         },
         () => {
-          this.setState({
-            processStatusAlert: "alert alert-danger",
-            processStatusMessage:
-              "Username or password incorrect. Please try again.",
+          toast.error('Username or password incorrect. Please try again', {
+            autoClose: false,
           });
         }
       );
-    }else if(this.props.role === "PROJECT MANAGER"){
+    } else if (this.props.role === "PROJECT MANAGER") {
       this.props.projectManagerLogin(
         loginObj,
         () => {
-          this.setState({
-            processStatusAlert: "alert alert-success",
-            processStatusMessage: "Login successful",
+          toast.success('Login Success', {
+            autoClose: false,
           });
           window.location = "/pmdashboard";
         },
         () => {
-          this.setState({
-            processStatusAlert: "alert alert-danger",
-            processStatusMessage:
-              "Username or password incorrect. Please try again.",
+          toast.error('Username or password incorrect. Please try again', {
+            autoClose: false,
           });
         }
       );
@@ -131,6 +117,7 @@ class LoginForm extends Component {
           <p>or</p>
           <a href="/">Register Here !</a>
         </div>
+        <ToastContainer />
       </div>
     );
   }

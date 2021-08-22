@@ -1,6 +1,6 @@
 import adminApi from "../apis/AdminAPI";
 import employeeAPI from "../apis/EmployeeAPI";
-import productManagerAPI from "../apis/ProductManagerAPI";
+import ProjectManagerAPI from "../apis/ProjectManagerAPI";
 
 export const ACTION_TYPES = {
   REGISTER_SUCCESS: "REGISTER_SUCCESS",
@@ -109,8 +109,8 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
 
 
   export const productManagerRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
-    productManagerAPI
-      .authProductManager()
+    ProjectManagerAPI
+      .authProjectManager()
       .register(data)
       .then((response) => {
         dispatch({
@@ -133,8 +133,8 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
   };
 
   export const productManagerLogin = (data, OnSuccess, OnFailure) => (dispatch) => {
-    productManagerAPI
-      .authProductManager()
+    ProjectManagerAPI
+      .authProjectManager()
       .login(data)
       .then((response) => {
         dispatch({

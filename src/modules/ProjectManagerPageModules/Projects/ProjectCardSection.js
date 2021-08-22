@@ -9,7 +9,7 @@ export default class ProjectCardSection extends Component {
         <div>
           <div className="row mt-4">
             <div className="col-lg-4 p-3">
-              <Link to="/addmemberproject">
+              <Link to={`${window.location.pathname}/addmemberproject`}>
                 <div className="card projectDashboardCard boderRadiusCards">
                   <div className="card-body projectDashboardCardOne">
                     <p className="projectDashboardCardText">Recruit</p>
@@ -19,7 +19,7 @@ export default class ProjectCardSection extends Component {
               </Link>
             </div>
             <div className="col-lg-4 p-3">
-              <Link to="/sprintbacklog">
+              <Link to={`${window.location.pathname}/sprintbacklog`}>
                 <div className="card projectDashboardCard boderRadiusCards">
                   <div className="card-body projectDashboardCardTwo">
                     <p className="projectDashboardCardText">Sprint</p>

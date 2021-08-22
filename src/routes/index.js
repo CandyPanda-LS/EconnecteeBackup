@@ -21,6 +21,7 @@ import EmployeeSingleProject from "../modules/EmployeePageModules/Projects/Emplo
 import RecruitEmployeesPage from "../pages/ProjectManager/ProjectsPage/RecruitEmployeesPage";
 import EvaluateEmployeePage from "../pages/ProjectManager/ProjectsPage/EvaluateEmployeePage";
 import EvaluateProjectPage from "../pages/ProjectManager/ProjectsPage/EvaluateProjectPage";
+import ProjectManagerRegistrationPage from "../pages/ProjectManager/ProjectManagerRegistrationPage/ProjectManagerRegistrationPage";
 
 export default class index extends Component {
   render() {
@@ -36,19 +37,19 @@ export default class index extends Component {
           <Route path="/editprofile" exact component={EditProfile} />
           <Route path="/employeedashboard" exact component={EmployeeDashboard} />
           <Route path="/empprojects" exact component={EmployeeProjectsPage} />
-          
-          <Route path="/empsingleproject" exact component={EmployeeSingleProject} />
+          <Route path="/empsingleproject/:projectid" exact component={EmployeeSingleProject} />
           <Route path="/evaluateemployee" exact component={EvaluateEmployeePage} />
           <Route path="/evaluateproject" exact component={EvaluateProjectPage} />
+          <Route path="/pmregister" exact component={ProjectManagerRegistrationPage} />
           <Route path="/pmdashboard" exact component={ProjectManagerDashboardPage} />
-          <Route path="/sprintbacklog" exact component={SprintBacklog} />
+          <Route path="/projectdashboard/:projectid/sprintbacklog" exact component={SprintBacklog} />
           <Route path="/projects" exact component={ProjectsPage} />
-          <Route path="/projectdashboard" exact component={ProjectDashboard} />
+          <Route path="/projectdashboard/:projectid" exact component={ProjectDashboard} />
           <Route path="/markattendence" exact component={AttendencePage} />
           <Route path="/admindashboard" exact component={AdminDashboardPage} />
           <Route path="/adminprojectsdashboard" exact component={AdminProjectsPage} />
           <Route path="/salarymanagement" exact component={AdminSalaryManagementPage} />
-          <Route path="/addmemberproject" exact component={RecruitEmployeesPage} />
+          <Route path="/projectdashboard/:projectid/addmemberproject" exact component={RecruitEmployeesPage} />
         </Router>
       </div>
     );
