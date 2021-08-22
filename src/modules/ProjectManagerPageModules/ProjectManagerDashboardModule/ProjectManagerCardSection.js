@@ -8,7 +8,7 @@ export default class EmployeeCardSection extends Component {
       <div>
         <div className="row mt-4">
           <div className="col-lg-4 p-3">
-            <Link to="/editprofile">
+            <Link to="/editprofilepm">
             <div className="card employeeDashboardCard boderRadiusCards">
               <div className="card-body employeeDashboardCardOne">
                 <p className="employeeDashboardCardText">Profile</p>

@@ -14,7 +14,7 @@ export default class EmployeeDashboardHeader extends Component {
                     <div className="col-lg-6 empDashboardUserDetailsColOne">
                       <img
                         className="empDashboardImage img-fluid"
-                        src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
+                        src={this.props.projectManagerObj.profileImg}
                         alt="empImage"
                       />
                     </div>

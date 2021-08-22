@@ -9,6 +9,8 @@ import DoneTasks from "./DoneTasks";
 import InProgressTasks from "./InProgressTasks";
 import TodoTask from "./TodoTask";
 
+
+
 class EmployeeSingleProject extends Component {
   constructor(props) {
     super(props);
@@ -19,16 +21,24 @@ class EmployeeSingleProject extends Component {
     };
   }
 
-   componentDidMount() {
-     this.props.fetchEmployee();
-
-    const selectedProject = this.props.currentEmployee.projectsList.filter(
+  componentDidMount() {
+    this.props.fetchEmployee(()=>{    const selectedProject = this.props.currentEmployee.projectsList.filter(
       (singleProj) => singleProj._id == this.props.match.params.projectid
     );
     this.setState({
       project: selectedProject[0],
-    });
-    console.log("selected project arr", selectedProject[0]);
+    })},()=>{});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentEmployee !== nextProps.currentEmployee) {
+      this.props.fetchEmployee(()=>{    const selectedProject = this.props.currentEmployee.projectsList.filter(
+        (singleProj) => singleProj._id == this.props.match.params.projectid
+      );
+      this.setState({
+        project: selectedProject[0],
+      })},()=>{});
+    }
   }
 
   toggleFeedbackForm = () => {

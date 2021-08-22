@@ -20,10 +20,12 @@ class InProgressTasks extends Component {
       this.props.sprintId,
       issueObj,
       () => {
-        this.props.fetchEmployee();
-        toast.success("Moved to Done", {
-          autoClose: 2000,
+        this.props.fetchEmployee(()=>{
+          toast.success("Moved to Done", {
+            autoClose: 2000,
+          });
         });
+
       },
       () => {
         toast.error("Something went wrong", {

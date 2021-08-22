@@ -4,8 +4,8 @@ export const ACTION_TYPES = {
   ADD_EMPLOYEE: "ADD_EMPLOYEE",
   GET_EMPLOYEE: "GET_EMPLOYEE",
   GET_ALL_EMPLOYEES: "GET_ALL_EMPLOYEES",
-  DELETE_EMPLOYEE:"DELETE_EMPLOYEE",
-  UPDATE_EMPLOYEE:"UPDATE_EMPLOYEE"
+  DELETE_EMPLOYEE: "DELETE_EMPLOYEE",
+  UPDATE_EMPLOYEE: "UPDATE_EMPLOYEE",
 };
 
 export const employeeRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
@@ -24,17 +24,20 @@ export const employeeRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
     });
 };
 
-export const fetchEmployee =  () =>  (dispatch) => {
-employeeAPI
+export const fetchEmployee = (OnSuccess) => (dispatch) => {
+  console.log("fetch employee");
+  employeeAPI
     .authEmployee()
     .getEmployeeDetails()
-    .then( (response) => {
+    .then((response) => {
       dispatch({
         type: ACTION_TYPES.GET_EMPLOYEE,
         payload: response.data,
       });
+      OnSuccess();
     })
-    .catch(() => { });
+    .catch(() => {
+    });
 };
 
 export const fetchAllEmployeeList = () => (dispatch) => {
@@ -47,37 +50,39 @@ export const fetchAllEmployeeList = () => (dispatch) => {
         payload: response.data,
       });
     })
-    .catch(() => { });
+    .catch(() => {});
 };
 
-export const deleteEmployee = (employeeId ,OnSuccess, OnFailure) => (dispatch) => {
-  employeeAPI
-    .authEmployee()
-    .deleteEmployee(employeeId)
-    .then(() => {
-      dispatch({
-        type: ACTION_TYPES.DELETE_EMPLOYEE,
-        payload: employeeId,
+export const deleteEmployee =
+  (employeeId, OnSuccess, OnFailure) => (dispatch) => {
+    employeeAPI
+      .authEmployee()
+      .deleteEmployee(employeeId)
+      .then(() => {
+        dispatch({
+          type: ACTION_TYPES.DELETE_EMPLOYEE,
+          payload: employeeId,
+        });
+        OnSuccess();
+      })
+      .catch(() => {
+        OnFailure();
       });
-      OnSuccess();
-    })
-    .catch(() => { 
-      OnFailure();
-    });
-};
+  };
 
-export const updateEmployee = (employeeId, data, OnSuccess, OnFailure) => (dispatch) => {
-  employeeAPI
-    .authEmployee()
-    .updateEmployee(employeeId,data)
-    .then((response) => {
-      dispatch({
-        type: ACTION_TYPES.UPDATE_EMPLOYEE,
-        payload: response.data,
+export const updateEmployee =
+  (employeeId, data, OnSuccess, OnFailure) => (dispatch) => {
+    employeeAPI
+      .authEmployee()
+      .updateEmployee(employeeId, data)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.UPDATE_EMPLOYEE,
+          payload: response.data,
+        });
+        OnSuccess();
+      })
+      .catch(() => {
+        OnFailure();
       });
-      OnSuccess();
-    })
-    .catch(() => { 
-      OnFailure();
-    });
-};
+  };

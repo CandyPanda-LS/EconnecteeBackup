@@ -3,25 +3,25 @@ import { storage } from "../../../firebase";
 import Progress from "../../../common/ProgressBar/progress";
 import { Form } from "reactstrap";
 import { connect } from "react-redux";
-import * as actions from "../../../store/actions/EmployeeActions";
+import * as actions from "../../../store/actions/ProjectManagerActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 
-class EditProfile extends Component {
+class EditProfilePM extends Component {
   constructor(props) {
     super(props);
     this.onValueChange = this.onValueChange.bind(this);
     this.onEditProfile = this.onEditProfile.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
     this.state = {
-      id: this.props.currentEmployee._id,
-      name: this.props.currentEmployee.name,
-      username: this.props.currentEmployee.username,
+      id: this.props.currentPM._id,
+      name: this.props.currentPM.name,
+      username: this.props.currentPM.username,
       password: "",
-      contactnumber: this.props.currentEmployee.mobileNumber,
-      profileImage: this.props.currentEmployee.profileImg,
+      contactnumber: this.props.currentPM.mobileNumber,
+      profileImage: this.props.currentPM.profileImg,
       uploadProfilePercentage: 0,
     };
   }
@@ -69,7 +69,7 @@ class EditProfile extends Component {
       mobileNumber: this.state.contactnumber,
       profileImg: this.state.profileImage,
     };
-    this.props.updateEmployee(
+    this.props.updateProjectManager(
       this.state.id,
       newProfileDetails,
       () => {
@@ -77,7 +77,7 @@ class EditProfile extends Component {
         toast.success("Profile Edited", {
           autoClose: 2000,
         });
-        window.location="/employeedashboard"
+        window.location="/pmdashboard"
       },
       () => {
         // this.props.fetchProjectById(this.props.projectId)
@@ -93,12 +93,12 @@ class EditProfile extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchEmployee(() => {});
+    this.props.fetchProjectManagerDetails(() => {});
   }
   render() {
     return (
       <div>
-        {this.props.currentEmployee ? (
+        {this.props.currentPM ? (
           <div className="container mt-5">
             <div className="card">
               <div className="container p-5">
@@ -109,7 +109,7 @@ class EditProfile extends Component {
                   <div className="row mb-2">
                     <div className="row m-0 mb-3 col">
                       <label htmlFor="name" className="form-label p-0">
-                        Employee Name
+                        Project manager Name
                       </label>
                       <input
                         type="text"
@@ -189,7 +189,6 @@ class EditProfile extends Component {
                         onChange={(e) => {
                           this.uploadImage(e);
                         }}
-                        value={this.state.profileImg}
                       />
                     </div>
 
@@ -234,11 +233,11 @@ class EditProfile extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  currentEmployee: state.employeeReducer.singleEmployee,
+  currentPM: state.projectManagerReducer.singleProjectManager,
 });
 
 const mapActionToProps = {
-  fetchEmployee: actions.fetchEmployee,
-  updateEmployee: actions.updateEmployee,
+  fetchProjectManagerDetails: actions.fetchProjectManagerDetails,
+  updateProjectManager: actions.updateProjectManager,
 };
-export default connect(mapStateToProps, mapActionToProps)(EditProfile);
+export default connect(mapStateToProps, mapActionToProps)(EditProfilePM);

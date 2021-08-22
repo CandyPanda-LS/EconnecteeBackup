@@ -1,26 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-class Progress extends React.Component {
-
-    render() {
-        return (
-            <div className="progress">
-                <div
-                    className="progress-bar bg-primary"
-                    role="progressbar"
-                    style={{ width: `${this.props.percentage}%`}}
-                    aria-valuenow={`${this.props.percentage}`}
-                    aria-valuemin='0'
-                    aria-valuemax='100'
-                />
-            </div>
-        );
-    }
-}
+const Progress = ({ percentage }) => {
+  return (
+    <div>
+      <div className="progress">
+        <div
+          className="progress-bar bg-success"
+          role="progressbar"
+          style={{ width: `${percentage}%` }}
+          aria-valuenow="25"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+    </div>
+  );
+};
 
 Progress.propTypes = {
-    percentage: PropTypes.number.isRequired
-}
+  percentage: PropTypes.number.isRequired,
+};
 
 export default Progress;

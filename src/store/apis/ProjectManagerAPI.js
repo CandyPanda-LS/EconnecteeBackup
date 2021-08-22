@@ -11,8 +11,8 @@ const authProjectManagerApi = {
     return {
       fetchProjectManagerDetails: () => axios.get(`${baseUrl}/api/projectmanager`,config),
       fetchAllProjectManagersList: () => axios.get(`${baseUrl}/api/projectmanager/all`),
-      updateProjectManager: (projectManagerId,updatedObject) => axios.get(`${baseUrl}/api/projectmanager/updateprofile/${projectManagerId}`,updatedObject),
-      deleteProjectManager: (projectManagerId) => axios.get(`${baseUrl}/api/projectmanager/${projectManagerId}`),
+      updateProjectManager: (projectManagerId,updatedObject) => axios.put(`${baseUrl}/api/projectmanager/updateprofile/${projectManagerId}`,updatedObject),
+      deleteProjectManager: (projectManagerId) => axios.delete(`${baseUrl}/api/projectmanager/${projectManagerId}`),
       register: (newProjectManager) =>
         axios.post(`${baseUrl}/api/projectmanager/register`, newProjectManager),
       login: (loginProjectManager) =>

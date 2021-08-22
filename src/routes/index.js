@@ -22,6 +22,7 @@ import RecruitEmployeesPage from "../pages/ProjectManager/ProjectsPage/RecruitEm
 import EvaluateEmployeePage from "../pages/ProjectManager/ProjectsPage/EvaluateEmployeePage";
 import EvaluateProjectPage from "../pages/ProjectManager/ProjectsPage/EvaluateProjectPage";
 import ProjectManagerRegistrationPage from "../pages/ProjectManager/ProjectManagerRegistrationPage/ProjectManagerRegistrationPage";
+import EditProfilePM from "../pages/ProjectManager/EditProfilePage/EditProfilePM";
 
 export default class index extends Component {
   render() {
@@ -35,6 +36,7 @@ export default class index extends Component {
           <Route path="/addemployee" exact component={AddEmployeePage} />
           <Route path="/pmlogin" exact component={PMLoginPage} />
           <Route path="/editprofile" exact component={EditProfile} />
+          <Route path="/editprofilepm" exact component={EditProfilePM} />
           <Route path="/employeedashboard" exact component={EmployeeDashboard} />
           <Route path="/empprojects" exact component={EmployeeProjectsPage} />
           <Route path="/empsingleproject/:projectid" exact component={EmployeeSingleProject} />

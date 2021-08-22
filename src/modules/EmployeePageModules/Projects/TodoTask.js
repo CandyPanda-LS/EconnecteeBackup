@@ -21,10 +21,12 @@ class TodoTask extends Component {
       this.props.sprintId,
       issueObj,
      async () => {
-        await this.props.fetchEmployee()
-        toast.success('Moved to In Progress', {
-          autoClose: 2000,
-        });
+        this.props.fetchEmployee(()=>{
+          toast.success('Moved to In Progress', {
+            autoClose: 2000,
+          });
+        })
+
       },
       () => {
         toast.error('Something went wrong', {
