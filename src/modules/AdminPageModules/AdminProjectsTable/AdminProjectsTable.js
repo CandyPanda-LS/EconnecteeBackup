@@ -7,6 +7,10 @@ import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import AddProjectForm from "../AddProjectForm/AddProjectForm";
 import EditProjectForm from "../EditProjectForm/EditProjectForm";
 
+
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 class AdminProjectsTable extends Component {
   constructor(props) {
     super(props);
@@ -58,10 +62,10 @@ class AdminProjectsTable extends Component {
       <div className="card mt-5 boderRadiusCards">
         <div className="card-body">
           <div className="row">
-            <div className="col-md-8">
-              <h5>{this.props.projectList.length} Projects</h5>
+            <div className="col-md-9">
+              <h5 style={{marginLeft:"20px",marginTop:"10px",fontSize:"20px", fontFamily:"Orbitron"}}>{this.props.projectList.length} Projects</h5>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
               <button className="btn sprintTableBtn">Generate Report</button>
               <button
                 className="btn sprintTableBtn"
@@ -69,8 +73,13 @@ class AdminProjectsTable extends Component {
               >
                 Create
               </button>
+              
             </div>
+            <br/>
+            <br/>
+            <br/>
             <hr />
+            <br/>
           </div>
           <table className="table table-hover">
             <tbody>
@@ -88,7 +97,8 @@ class AdminProjectsTable extends Component {
                     </td>
                     <td>
                       <button
-                        className="btn btn-primary empTableBtn"
+                        className="btn empTableBtn"
+                        style={{ backgroundColor: "#087E8B", color: "white" }}
                         onClick={() => {
                           this.setState({ singleProjectObj: singleProject });
                           this.toggleEditProject();
@@ -101,7 +111,23 @@ class AdminProjectsTable extends Component {
                       <button
                         className="btn btn-danger empTableBtn"
                         onClick={() => {
-                          this.onRemoveProject(singleProject._id);
+                          confirmAlert({
+                            title: 'Confirm to delete',
+                            message: 'Are you sure you want to delete the project',
+                            buttons: [
+                              {
+                                label: 'Yes',
+                                onClick: () => this.onRemoveProject(singleProject._id)
+                              }
+                              // ,
+                              // {
+                              //   label: 'No',
+                                
+                              // }
+                            ]
+                          });
+
+                          
                         }}
                       >
                         <i class="bi bi-trash-fill"></i>
@@ -112,6 +138,7 @@ class AdminProjectsTable extends Component {
               })}
             </tbody>
           </table>
+          
         </div>
         <ToastContainer />
         {/* Modals Section */}

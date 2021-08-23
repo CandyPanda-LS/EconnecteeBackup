@@ -38,15 +38,17 @@ class TodoTask extends Component {
 
   render() {
     return (
-      <div className="card boderRadiusCards">
+      <div className="card boderRadiusCards shadow-none">
         <div className="card-body">
           <div className="row">
-            <h3 className="mb-3">To do</h3>
+            <h3  style={{marginLeft:"20px",marginTop:"10px",fontSize:"20px", fontFamily:"Orbitron"}}>To do</h3>
 
+            <hr />
+            <br/>
             {this.props.toDoList.map((singleIssue) => {
               return (
                 <div className="col-md-12 mb-4">
-                  <div className="card boderRadiusCards">
+                  <div className="card boderRadiusCards  shadow-none" style={{background:"#E5E5E5"}}>
                     <div className="card-body">
                       <h6>{singleIssue.issueName}</h6>
                       <hr />

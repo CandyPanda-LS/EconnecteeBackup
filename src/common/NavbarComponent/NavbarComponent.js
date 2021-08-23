@@ -1,7 +1,29 @@
 import React, { Component } from "react";
 import "./NavbarComponent.css";
+import { connect } from "react-redux";
+import * as employeeActions from "../../store/actions/EmployeeActions";
+import * as pmActions from "../../store/actions/ProjectManagerActions";
+import * as adminActions from "../../store/actions/AdminActions";
+import * as authActions from "../../store/actions/authActions";
 
-export default class NavbarComponent extends Component {
+class NavbarComponent extends Component {
+  componentDidMount(){
+    
+    
+    switch (localStorage.getItem("role")) {
+      case "ADMIN": 
+      this.props.fetchAdmin();
+        break;
+      case "PM":
+        this.props.fetchPM();        
+        break;
+      case "EMPLOYEE": 
+        this.props.fetchEmployee();       
+        break;
+      default:
+        break;
+    }
+  }
   render() {
     return (
       <div>
@@ -36,6 +58,74 @@ export default class NavbarComponent extends Component {
                   </a>
                 </li>
               </ul>
+
+            {/* If the role of the user is employee */}
+              {this.props.currentEmployee ?
+              <span class="span-inline my-2 my-lg-0">
+              <div className="row">
+                <div className="col">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {this.props.currentEmployee.name}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#" onClick={()=>{this.props.logout()}}>Logout</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                </div>
+                <div className="col">
+                  {<img width="50px" height="50px" style={{borderRadius:"50%"}} src={this.props.currentEmployee.profileImg}/> }
+                </div>
+              </div>                
+            </span>
+              :""}
+            {/* If the role of the user is PM */}
+            {this.props.currentPM ?
+              <span class="span-inline my-2 my-lg-0">
+              <div className="row">
+                <div className="col">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {this.props.currentPM.name}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#" onClick={()=>{this.props.logout()}}>Logout</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                </div>
+                <div className="col">
+                  {<img width="50px" height="50px" style={{borderRadius:"50%"}} src={this.props.currentPM.profileImg}/> }
+                </div>
+              </div>                
+            </span>
+              :""}
+
+            {/* If the role of the user is admin */}
+            {this.props.currentAdmin ?
+              <span class="span-inline my-2 my-lg-0">
+              <div className="row">
+                <div className="col">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {this.props.currentAdmin.name}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#" onClick={()=>{this.props.logout()}}>Logout</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                </div>
+                <div className="col">
+                  {<img width="50px" height="50px" style={{borderRadius:"50%"}} src={this.props.currentAdmin.profileImg}/> }
+                </div>
+              </div>                
+            </span>
+              :""}    
             </div>
           </div>
         </nav>
@@ -43,3 +133,20 @@ export default class NavbarComponent extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => ({
+  currentEmployee: state.employeeReducer.singleEmployee,
+  currentAdmin: state.AdminReducer.singleAdmin,
+  currentPM: state.projectManagerReducer.singleProjectManager,
+
+});
+
+const mapActionToProps = {
+  fetchEmployee: employeeActions.fetchEmployee,
+  fetchAdmin: adminActions.fetchAdmin,
+  fetchPM: pmActions.fetchProjectManagerDetails,
+
+  logout: authActions.logout
+};
+export default connect(mapStateToProps, mapActionToProps)(NavbarComponent);

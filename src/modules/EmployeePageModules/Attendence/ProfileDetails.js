@@ -11,7 +11,7 @@ export default class ProfileDetails extends Component {
               <div className="col-lg-12 empDashboardUserDetailsColOne">
                 <img
                   className="empDashboardImage img-fluid"
-                  src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
+                  src="https://st4.depositphotos.com/15648834/23779/v/600/depositphotos_237795814-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                   alt="empImage"
                 />
               </div>

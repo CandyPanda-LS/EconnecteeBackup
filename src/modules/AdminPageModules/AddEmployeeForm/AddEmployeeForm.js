@@ -74,7 +74,7 @@ export class AddEmployeeForm extends Component {
   render() {
     return (
       <div>
-        <div className="card boderRadiusCards cardAddEmployeeForm">
+        <div className="card boderRadiusCards cardAddEmployeeForm shadow-none">
           <div className="card-body text-center">
             <div className="container mt-4">
               <h5>EMPLOYEE REGISTRATION !</h5>

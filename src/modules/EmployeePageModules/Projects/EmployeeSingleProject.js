@@ -52,15 +52,19 @@ class EmployeeSingleProject extends Component {
           <div className="container">
             <div className="row mt-4 mb-2">
               <div className="col-md-12">
-                <h1 className="text-left mb-4">
+                <h1 className="text-left mb-4" style={{fontFamily:"Orbitron"}}>
                   {this.state.project.projectName}
                 </h1>
-                <button
+                <h1 className="text-left mb-4" style={{fontFamily:"Orbitron",fontSize:"15px",color:"#808080"}}>
+                  {`Project Manager: ${this.state.project.projectManager.name}`}
+                </h1>
+              
+                {/* <button
                   className="btn sprintTableBtn  mb-3"
                   onClick={this.toggleFeedbackForm}
                 >
                   ADD FEEDBACK
-                </button>
+                </button> */}
               </div>
 
               <div className="col-md-4">

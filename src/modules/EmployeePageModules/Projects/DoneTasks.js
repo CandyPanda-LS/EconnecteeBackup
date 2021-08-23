@@ -3,14 +3,16 @@ import React, { Component } from "react";
 export default class DoneTasks extends Component {
   render() {
     return (
-      <div className="card boderRadiusCards">
+      <div className="card boderRadiusCards shadow-none">
         <div className="card-body">
           <div className="row">
-            <h3 className="mb-3">Done</h3>
+            <h3 style={{marginLeft:"20px",marginTop:"10px",fontSize:"20px", fontFamily:"Orbitron"}}>Done</h3>
+            <hr />
+            <br/>
             {this.props.doneList.map((singleIssue) => {
               return (
                 <div className="col-md-12 mb-4">
-                  <div className="card boderRadiusCards">
+                  <div className="card boderRadiusCards shadow-none" style={{background:"#E5E5E5"}}>
                     <div className="card-body">
                       <h6>{singleIssue.issueName}</h6>
                       <hr />

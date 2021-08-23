@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/EmployeeActions";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import Clock from "react-live-clock";
+
 
 class EmployeeProjects extends Component {
   componentDidMount() {
@@ -13,24 +15,38 @@ class EmployeeProjects extends Component {
 
   render() {
     return (
-      <div className="card mt-5 boderRadiusCards">
+
+      <div>
+        <span className="m-5">
+          <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Project Overview</h5>
+        </span>
+        <div className="card  boderRadiusCards">
         <div className="card-body">
           <div>
-            <div className="mt-2 text-center">
-              <h1>ASSIGNED PROJECTS</h1>
+            <div className="mt-3">
+              <h1 style={{fontFamily:"Orbitron",fontSize:"20px",color:"#vlack",marginLeft:"20px"}}>PROJECTS</h1>
             </div>
-            <div className="row mb-5 p-4">
+            <div >
+              <Clock style={{marginLeft:"20px",color:"grey"}} format="YYYY/MM/DD:HH:mm:ss" interval={1000} ticking={true} />  
+            </div>
+            
+            <div className="row mb-4">
               {this.props.currentEmployee ? (
                 this.props.currentEmployee.projectsList.map(
                   (singleproj, key) => {
                     return (
-                      <div className="col-md-2">
+                      <div className="col-md-3">
                         <Link to={`/empsingleproject/${singleproj._id}`}>
-                          <div className="card mt-5 boderRadiusCards empProjectCards">
-                            <div className="card-body">
-                              <h4>{singleproj.projectName}</h4>
-                              <h6 className="empProjectCardsText mb-3">
+                          <div className="card mt-5 p-1 boderRadiusCards empProjectCards">
+                            <div className="card-body" >
+                              <h4 style={{fontSize:"25px",marginTop:"10px"}}>{singleproj.projectName}</h4>
+                              <h6 style={{fontSize:"15px"}} className="empProjectCardsText mb-3">
                                 {singleproj.descripton}
+                              </h6>
+                              
+                              <h6 className="mt-3 p-0" style={{fontSize:"15px"}}>Project Manager</h6>
+                              <h6 className="empProjectCardsText p-0" style={{fontSize:"12px" , marginBottom:"20px"}}>
+                                {singleproj.projectManager.name}
                               </h6>
                               <span
                                 style={{
@@ -39,6 +55,7 @@ class EmployeeProjects extends Component {
                                   paddingLeft: "10px",
                                   fontSize: "25px",
                                   margin: "5px",
+                          
                                   borderRadius: "50%",
                                   backgroundColor: "#DB380A",
                                 }}
@@ -71,13 +88,10 @@ class EmployeeProjects extends Component {
                               >
                                 {singleproj.sprintList ? "4" : ""}
                               </span>
-                              <h6 className="mt-3 p-0">Project Manager</h6>
-                              <h6 className="empProjectCardsText p-0">
-                                {singleproj.projectManager.name}
-                              </h6>
                             </div>
                           </div>
                         </Link>
+                        
                       </div>
                     );
                   }
@@ -96,9 +110,11 @@ class EmployeeProjects extends Component {
 
                 </div>
               )}
+              
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

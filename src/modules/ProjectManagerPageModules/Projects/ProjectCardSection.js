@@ -12,9 +12,9 @@ export default class ProjectCardSection extends Component {
               <Link to={`${window.location.pathname}/addmemberproject`}>
                 <div className="card projectDashboardCard boderRadiusCards">
                   <div className="card-body projectDashboardCardOne">
-                    <p className="projectDashboardCardText">Recruit</p>
-                    <p className="projectDashboardCardText">Employees</p>
-                  </div>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>Recruit</h5>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>Employee</h5>
+              </div>
                 </div>
               </Link>
             </div>
@@ -22,9 +22,9 @@ export default class ProjectCardSection extends Component {
               <Link to={`${window.location.pathname}/sprintbacklog`}>
                 <div className="card projectDashboardCard boderRadiusCards">
                   <div className="card-body projectDashboardCardTwo">
-                    <p className="projectDashboardCardText">Sprint</p>
-                    <p className="projectDashboardCardText">Management</p>
-                  </div>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>Sprint </h5>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>management</h5>
+              </div>
                 </div>
               </Link>
             </div>
@@ -32,9 +32,9 @@ export default class ProjectCardSection extends Component {
               <Link to="/evaluateemployee">
                 <div className="card projectDashboardCard boderRadiusCards">
                   <div className="card-body projectDashboardCardThree">
-                    <p className="projectDashboardCardText">Evaluate</p>
-                    <p className="projectDashboardCardText">Employee</p>
-                  </div>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>Evaluate</h5>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>Employee</h5>
+              </div>
                 </div>
               </Link>
             </div>
@@ -42,9 +42,9 @@ export default class ProjectCardSection extends Component {
               <Link to="/evaluateproject">
                 <div className="card projectDashboardCard boderRadiusCards">
                   <div className="card-body projectDashboardCardFour">
-                    <p className="projectDashboardCardText">Evaluate</p>
-                    <p className="projectDashboardCardText">Project</p>
-                  </div>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>Evaluate</h5>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>Project</h5>
+              </div>
                 </div>
               </Link>
             </div>

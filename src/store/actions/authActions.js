@@ -22,6 +22,7 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
   
         if (response.data.token) {
           localStorage.setItem("x-auth-token", response.data.token);
+          localStorage.setItem("role","ADMIN");
         }
         OnSuccess();
       })
@@ -46,6 +47,8 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
   
         if (response.data.token) {
           localStorage.setItem("x-auth-token", response.data.token);
+          localStorage.setItem("role","ADMIN");
+
         }
         OnSuccess();
       })
@@ -71,6 +74,8 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
   
         if (response.data.token) {
           localStorage.setItem("x-auth-token", response.data.token);
+          localStorage.setItem("role","EMPLOYEE");
+
         }
         OnSuccess();
       })
@@ -95,6 +100,8 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
   
         if (response.data.token) {
           localStorage.setItem("x-auth-token", response.data.token);
+          localStorage.setItem("role","EMPLOYEE");
+
         }
         OnSuccess();
       })
@@ -120,6 +127,8 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
   
         if (response.data.token) {
           localStorage.setItem("x-auth-token", response.data.token);
+          localStorage.setItem("role","PM");
+
         }
         OnSuccess();
       })
@@ -144,6 +153,8 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
   
         if (response.data.token) {
           localStorage.setItem("x-auth-token", response.data.token);
+          localStorage.setItem("role","PM");
+
         }
         OnSuccess();
       })
@@ -155,3 +166,12 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
         OnFailure();
       });
   };
+
+  export const logout = () => (dispatch) => {
+    localStorage.removeItem("x-auth-token");
+    dispatch({
+      type: ACTION_TYPES.LOGOUT,
+    });
+    window.location = "/";
+  };
+  

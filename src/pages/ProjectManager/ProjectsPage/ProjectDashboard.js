@@ -9,7 +9,7 @@ export default class ProjectDashboard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <ProjectDashboardHeader />
+              {/* <ProjectDashboardHeader /> */}
             </div>
             <div className="col-lg-12">
               <ProjectCardSection/>

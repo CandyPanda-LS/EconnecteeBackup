@@ -6,8 +6,7 @@ export default class AdminProjectsPage extends Component {
         return (
             <div className="container mt-5">
                 <div className="text-center">
-                    <span className="display-3">ADMIN PROJECT MANAGEMENT</span>
-                </div>
+                <h1 className="text-center mt-4 commonTextColor">PROJECT MANAGEMENT</h1>                </div>
                 <AdminProjectsTable/>
             </div>
         )

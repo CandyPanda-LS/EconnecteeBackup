@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import "./EmployeeCardSection.css";
+import "../../../text.css"
 
 export default class EmployeeCardSection extends Component {
   render() {
@@ -11,8 +12,8 @@ export default class EmployeeCardSection extends Component {
             <Link to="/editprofile">
             <div className="card employeeDashboardCard boderRadiusCards">
               <div className="card-body employeeDashboardCardOne">
-                <p className="employeeDashboardCardText">Profile</p>
-                <p className="employeeDashboardCardText">Details</p>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Edit</h5>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Profile</h5>
               </div>
             </div>
             </Link>
@@ -21,8 +22,8 @@ export default class EmployeeCardSection extends Component {
           <Link to="/empprojects">
             <div className="card employeeDashboardCard boderRadiusCards">
               <div className="card-body employeeDashboardCardTwo">
-                <p className="employeeDashboardCardText">Project</p>
-                <p className="employeeDashboardCardText">Details</p>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Project</h5>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Details</h5>
               </div>
             </div>
             </Link>
@@ -31,9 +32,8 @@ export default class EmployeeCardSection extends Component {
           <Link to="/markattendence">
             <div className="card employeeDashboardCard boderRadiusCards">
               <div className="card-body employeeDashboardCardThree">
-                <p className="employeeDashboardCardText">Mark</p>
-                <p className="employeeDashboardCardText">Attendence</p>
-              </div>
+              <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Mark</h5>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Attendance</h5>              </div>
             </div>
             </Link>
           </div>
