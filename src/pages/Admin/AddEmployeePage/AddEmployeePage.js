@@ -7,7 +7,7 @@ export default class AddEmployeePage extends Component {
   render() {
     return (
       <div className="container addEmployeePage">
-        <h1 className="text-center mt-4 commonTextColor">EMPLOYEE DASHBOARD</h1>
+        <h1 className="text-center mt-4 commonTextColor">EMPLOYEE MANAGEMENT</h1>
         <div className="row mt-4">
           <div className="col-lg-4 col-md-4">
             <AddEmployeeForm />

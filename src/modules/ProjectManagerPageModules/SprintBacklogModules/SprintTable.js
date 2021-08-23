@@ -65,7 +65,7 @@ class SprintTable extends Component {
             <div className="card mt-3 boderRadiusCards">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-md-8">
+                  <div className="col-md-9">
                     <h5>
                       {singleSprint.toDoList.length +
                         singleSprint.inProgressList.length +
@@ -79,7 +79,7 @@ class SprintTable extends Component {
                       )} - ${singleSprint.fromDate.slice(0, 10)}`}
                     </p>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-3">
                     <button
                       className="btn sprintTableBtn"
                       onClick={() => {
@@ -96,8 +96,9 @@ class SprintTable extends Component {
                         this.setState({ sprintId: singleSprint._id });
                         this.toggleCreateIssue();
                       }}
+                      
                     >
-                      <i class="bi bi-plus-circle-fill"></i>
+                      <i class="bi bi-plus-circle-fill " ></i>
                     </button>
                   </div>
 
@@ -129,7 +130,7 @@ class SprintTable extends Component {
                                 this.toggleEditIssue();
                               }}
                             >
-                              <i class="bi bi-gear-fill"></i>
+                              <i class="bi bi-gear-fill" ></i>
                             </button>
                           </td>
                           <td>

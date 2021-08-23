@@ -1,31 +1,27 @@
 .projectDashboardCardOne{
-    background-image: url("../../../assets/ProjectDashboard/employee.svg");
+    background-image: url("../../../assets/ProjectDashboard/3.png");
     min-height: 200px;
-    background-size: 60%;
     background-repeat: no-repeat;
     background-position-x: right;
 }
 
 .projectDashboardCardTwo{
-    background-image: url("../../../assets/ProjectDashboard/sprint.svg");
+    background-image: url("../../../assets/ProjectDashboard/2.png");
     min-height: 200px;
-    background-size: 50%;
     background-repeat: no-repeat;
     background-position-x: right;
 }
 
 .projectDashboardCardThree{
-    background-image: url("../../../assets/ProjectDashboard/evaluateemployee.svg");
+    background-image: url("../../../assets/ProjectDashboard/4.png");
     min-height: 200px;
-    background-size: 60%;
     background-repeat: no-repeat;
     background-position-x: right;
 }
 
 .projectDashboardCardFour{
-    background-image: url("../../../assets/ProjectDashboard/evaluateproject.svg");
+    background-image: url("../../../assets/ProjectDashboard/1.png");
     min-height: 200px;
-    background-size: 60%;
     background-repeat: no-repeat;
     background-position-x: right;
 }

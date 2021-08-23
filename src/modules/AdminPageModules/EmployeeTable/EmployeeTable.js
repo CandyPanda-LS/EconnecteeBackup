@@ -8,6 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import EditEmployeeForm from "../EditEmployeeForm/EditEmployeeForm";
 
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 class EmployeeTable extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +49,7 @@ class EmployeeTable extends Component {
 
   render() {
     return (
-      <div className="card boderRadiusCards">
+      <div className="card boderRadiusCards shadow-none">
         <div className="card-body empTable">
           <table className="table table-hover">
             <thead>
@@ -98,7 +101,22 @@ class EmployeeTable extends Component {
                         className="btn  empTableBtn"
                         style={{ backgroundColor: "#087E8B", color: "white" }}
                         onClick={() => {
-                          this.onRemoveEmployee(singleEmployee._id);
+                          confirmAlert({
+                            title: 'Confirm to delete',
+                            message: 'Are you sure you want to delete the employee',
+                            buttons: [
+                              {
+                                label: 'Yes',
+                                onClick: () => this.onRemoveEmployee(singleEmployee._id)
+                              }
+                              // ,
+                              // {
+                              //   label: 'No',
+                                
+                              // }
+                            ]
+                          });
+                          
                         }}
                       >
                         <i class="bi bi-trash-fill"></i>

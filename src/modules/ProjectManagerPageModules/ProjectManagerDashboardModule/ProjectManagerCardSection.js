@@ -11,8 +11,8 @@ export default class EmployeeCardSection extends Component {
             <Link to="/editprofilepm">
             <div className="card employeeDashboardCard boderRadiusCards">
               <div className="card-body employeeDashboardCardOne">
-                <p className="employeeDashboardCardText">Profile</p>
-                <p className="employeeDashboardCardText">Details</p>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Edit</h5>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Profile</h5>
               </div>
             </div>
             </Link>
@@ -21,8 +21,8 @@ export default class EmployeeCardSection extends Component {
           <Link to="/projects">
             <div className="card employeeDashboardCard boderRadiusCards">
               <div className="card-body employeeDashboardCardTwo">
-                <p className="employeeDashboardCardText">Project</p>
-                <p className="employeeDashboardCardText">Details</p>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Project</h5>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Details</h5>
               </div>
             </div>
             </Link>
@@ -31,8 +31,8 @@ export default class EmployeeCardSection extends Component {
           <Link to="/markattendence">
             <div className="card employeeDashboardCard boderRadiusCards">
               <div className="card-body employeeDashboardCardThree">
-                <p className="employeeDashboardCardText">Mark</p>
-                <p className="employeeDashboardCardText">Attendence</p>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Mark</h5>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>attendance</h5>
               </div>
             </div>
             </Link>

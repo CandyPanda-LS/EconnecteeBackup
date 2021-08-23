@@ -10,9 +10,9 @@ export default class AdminDashboardCardSection extends Component {
             <Link to="/addemployee">
               <div className="card employeeDashboardCard boderRadiusCards">
                 <div className="card-body employeeDashboardCardOne">
-                  <p className="employeeDashboardCardText">Employee</p>
-                  <p className="employeeDashboardCardText">Management</p>
-                </div>
+                 <h5 style={{fontFamily:"Orbitron",fontSize:"30px",color:"#087E8B"}}>Employee</h5>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"30px",color:"#087E8B"}}>management</h5>
+              </div>
               </div>
             </Link>
           </div>
@@ -20,8 +20,8 @@ export default class AdminDashboardCardSection extends Component {
             <Link to="/adminprojectsdashboard">
               <div className="card employeeDashboardCard boderRadiusCards">
                 <div className="card-body employeeDashboardCardTwo">
-                  <p className="employeeDashboardCardText">Project</p>
-                  <p className="employeeDashboardCardText">Management</p>
+                <h5 style={{fontFamily:"Orbitron",fontSize:"30px",color:"#087E8B"}}>Project</h5>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"30px",color:"#087E8B"}}>management</h5>
                 </div>
               </div>
             </Link>
@@ -30,8 +30,8 @@ export default class AdminDashboardCardSection extends Component {
             <Link to="/salarymanagement">
               <div className="card employeeDashboardCard boderRadiusCards">
                 <div className="card-body employeeDashboardCardThree">
-                  <p className="employeeDashboardCardText">Salary</p>
-                  <p className="employeeDashboardCardText">Management</p>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"30px",color:"#087E8B"}}>Salary</h5>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"30px",color:"#087E8B"}}>management</h5>
                 </div>
               </div>
             </Link>

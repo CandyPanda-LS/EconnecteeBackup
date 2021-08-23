@@ -1,5 +1,5 @@
 .employeeDashboardCardOne{
-    background-image: url("../../../assets/ProjectDashboard/employee.svg");
+    background-image: url("../../../assets/EmployeeDashboard/3.png");
     min-height: 200px;
     background-size: 70%;
     background-repeat: no-repeat;
@@ -7,7 +7,7 @@
 }
 
 .employeeDashboardCardTwo{
-    background-image: url("../../../assets/EmployeeDashboard/projectDetails.svg");
+    background-image: url("../../../assets/EmployeeDashboard/5.png");
     min-height: 200px;
     background-size: 70%;
     background-repeat: no-repeat;
@@ -15,7 +15,7 @@
 }
 
 .employeeDashboardCardThree{
-    background-image: url("../../../assets/EmployeeDashboard/markAttendence.svg");
+    background-image: url("../../../assets/EmployeeDashboard/1.png");
     min-height: 200px;
     background-size: 70%;
     background-repeat: no-repeat;
@@ -26,13 +26,6 @@
     border-radius: 20px;
 }
 
-.employeeDashboardCardText{
-    margin-top: 5%;
-    color: #000000;
-    line-height: 50%;
-    font-size: xx-large;
-    font-weight: bolder;
-}
 
 .employeeDashboardCard {
     padding-top: 8%;
