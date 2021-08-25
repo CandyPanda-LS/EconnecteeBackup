@@ -64,3 +64,37 @@ export const updateProjectManager = (projectManagerId, data, OnSuccess, OnFailur
       OnFailure();
     });
 };
+
+export const confirmInTime =
+(productManagerId, data, OnSuccess, OnFailure) => (dispatch) => {
+  authProjectManagerApi
+    .authProjectManager()
+    .confirmInTime(productManagerId, data)
+    .then((response) => {
+      dispatch({
+        type: ACTION_TYPES.UPDATE_PROJECT_MANAGER,
+        payload: response.data,
+      });
+      OnSuccess();
+    })
+    .catch(() => {
+      OnFailure();
+    });
+};
+
+export const confirmOutTime =
+(attendenceId, data, OnSuccess, OnFailure) => (dispatch) => {
+  authProjectManagerApi
+    .authProjectManager()
+    .confirmOutTime(attendenceId, data)
+    .then((response) => {
+      dispatch({
+        type: ACTION_TYPES.UPDATE_PROJECT_MANAGER,
+        payload: response.data,
+      });
+      OnSuccess();
+    })
+    .catch(() => {
+      OnFailure();
+    });
+};

@@ -70,7 +70,7 @@ class EditProfile extends Component {
       headers: {
         "Content-Type": "application/json",
         "Ocp-Apim-Subscription-Key":
-          "a680691db6174916bb8819e75475a406",
+          "cc8d3f8f4b23401c9e3b36474ecce84d",
       },
     };
 
@@ -80,7 +80,7 @@ class EditProfile extends Component {
 
     axios
       .post(
-        "https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/hexalist/persistedfaces?detectionModel=detection_01",
+        "https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/employeelist/persistedfaces?detectionModel=detection_01",
         newImageDetails,
         config
       )
@@ -96,13 +96,13 @@ class EditProfile extends Component {
         const configTrain = {
           headers: {
             "Ocp-Apim-Subscription-Key":
-              "a680691db6174916bb8819e75475a406",
+              "cc8d3f8f4b23401c9e3b36474ecce84d",
           },
         };
 
         axios
           .post(
-            "https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/hexalist/train",
+            "https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/employeelist/train",
             "",
             configTrain
           )

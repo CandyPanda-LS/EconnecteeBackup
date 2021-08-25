@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import axios from "axios";
 
 class EditProfilePM extends Component {
   constructor(props) {
@@ -23,6 +24,8 @@ class EditProfilePM extends Component {
       contactnumber: this.props.currentPM.mobileNumber,
       profileImage: this.props.currentPM.profileImg,
       uploadProfilePercentage: 0,
+      persistedFaceId:"",
+      processStatus:""
     };
   }
 
@@ -52,11 +55,62 @@ class EditProfilePM extends Component {
             .getDownloadURL()
             .then((url) => {
               this.setState({ profileImage: url });
+              this.onTrainProfileImage(url)
             });
         }
       );
     } else {
     }
+  }
+
+  onTrainProfileImage(imageUrl) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Ocp-Apim-Subscription-Key": "cc8d3f8f4b23401c9e3b36474ecce84d",
+      },
+    };
+
+    const newImageDetails = {
+      url: imageUrl,
+    };
+
+    axios
+      .post(
+        "https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/productmanagerlist/persistedfaces?detectionModel=detection_01",
+        newImageDetails,
+        config
+      )
+      .then((response) => {
+        console.log(
+          "Response for LargeFaceList is = " + response.data.persistedFaceId
+        );
+        this.setState({ persistedFaceId: response.data.persistedFaceId });
+        //alert("Image added to Large Face List");
+        this.setState({ processStatus: "Processing..." });
+
+        const configTrain = {
+          headers: {
+            "Ocp-Apim-Subscription-Key": "cc8d3f8f4b23401c9e3b36474ecce84d",
+          },
+        };
+
+        axios
+          .post(
+            "https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/productmanagerlist/train",
+            "",
+            configTrain
+          )
+          .then(() => {
+            this.setState({ processStatus: "Trained Successfully" });
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   }
 
   onEditProfile(e) {
@@ -68,6 +122,7 @@ class EditProfilePM extends Component {
       password: this.state.password,
       mobileNumber: this.state.contactnumber,
       profileImg: this.state.profileImage,
+      persistedFaceId: this.state.persistedFaceId
     };
     this.props.updateProjectManager(
       this.state.id,
@@ -77,7 +132,7 @@ class EditProfilePM extends Component {
         toast.success("Profile Edited", {
           autoClose: 2000,
         });
-        window.location="/pmdashboard"
+        window.location = "/pmdashboard";
       },
       () => {
         // this.props.fetchProjectById(this.props.projectId)
@@ -180,6 +235,7 @@ class EditProfilePM extends Component {
                     <label htmlFor="profile-image" className="form-label">
                       Profile Image
                     </label>
+                    <h6>{this.state.processStatus}</h6>
                     <div className="input-group">
                       <input
                         type="file"
@@ -209,7 +265,7 @@ class EditProfilePM extends Component {
                     </button>
                   </div>
                 </Form>
-                <ToastContainer/>
+                <ToastContainer />
               </div>
             </div>
           </div>

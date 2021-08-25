@@ -9,6 +9,8 @@ const config = {
 const authProjectManagerApi = {
   authProjectManager() {
     return {
+      confirmOutTime: (attendenceId,confirmOutTimeObj) => axios.put(`${baseUrl}/api/projectmanager/confirmouttime/${attendenceId}`,confirmOutTimeObj),
+      confirmInTime: (projectManagerId,confirmInTimeObj) => axios.put(`${baseUrl}/api/projectmanager/confirmintime/${projectManagerId}`,confirmInTimeObj),
       fetchProjectManagerDetails: () => axios.get(`${baseUrl}/api/projectmanager`,config),
       fetchAllProjectManagersList: () => axios.get(`${baseUrl}/api/projectmanager/all`),
       updateProjectManager: (projectManagerId,updatedObject) => axios.put(`${baseUrl}/api/projectmanager/updateprofile/${projectManagerId}`,updatedObject),

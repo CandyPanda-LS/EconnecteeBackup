@@ -23,6 +23,7 @@ import EvaluateEmployeePage from "../pages/ProjectManager/ProjectsPage/EvaluateE
 import EvaluateProjectPage from "../pages/ProjectManager/ProjectsPage/EvaluateProjectPage";
 import ProjectManagerRegistrationPage from "../pages/ProjectManager/ProjectManagerRegistrationPage/ProjectManagerRegistrationPage";
 import EditProfilePM from "../pages/ProjectManager/EditProfilePage/EditProfilePM";
+import PMAttendencePage from "../pages/ProjectManager/PMAttendencePage/PMAttendencePage"
 
 export default class index extends Component {
   render() {
@@ -48,6 +49,7 @@ export default class index extends Component {
           <Route path="/projects" exact component={ProjectsPage} />
           <Route path="/projectdashboard/:projectid" exact component={ProjectDashboard} />
           <Route path="/markattendence" exact component={AttendencePage} />
+          <Route path="/pmmarkattendence" exact component={PMAttendencePage} />
           <Route path="/admindashboard" exact component={AdminDashboardPage} />
           <Route path="/adminprojectsdashboard" exact component={AdminProjectsPage} />
           <Route path="/salarymanagement" exact component={AdminSalaryManagementPage} />

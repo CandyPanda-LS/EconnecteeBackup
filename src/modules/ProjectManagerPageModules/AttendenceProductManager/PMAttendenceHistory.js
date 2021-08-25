@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../../../store/actions/EmployeeActions";
 
-class AttendenceHistory extends Component {
+class PMAttendenceHistory extends Component {
   render() {
     return (
       <div>
@@ -17,7 +16,7 @@ class AttendenceHistory extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.props.singleEmployee && this.props.singleEmployee.attendanceList.map(
+                {this.props.singleProjectManager && this.props.singleProjectManager.attendanceList.map(
                   (singleAttendence) => {
                     return (
                       <tr>
@@ -44,7 +43,7 @@ class AttendenceHistory extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  singleEmployee: state.employeeReducer.singleEmployee,
+  singleProjectManager: state.projectManagerReducer.singleProjectManager,
 });
 
-export default connect(mapStateToProps, null)(AttendenceHistory);
+export default connect(mapStateToProps, null)(PMAttendenceHistory);

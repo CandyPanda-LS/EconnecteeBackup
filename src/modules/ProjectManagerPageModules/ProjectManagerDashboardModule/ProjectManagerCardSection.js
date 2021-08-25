@@ -28,7 +28,7 @@ export default class EmployeeCardSection extends Component {
             </Link>
           </div> 
           <div className="col-lg-4 p-3">
-          <Link to="/markattendence">
+          <Link to="/pmmarkattendence">
             <div className="card employeeDashboardCard boderRadiusCards">
               <div className="card-body employeeDashboardCardThree">
                 <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#087E8B"}}>Mark</h5>

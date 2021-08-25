@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Clock from "react-live-clock";
 import { connect } from "react-redux";
 
-class ProfileDetails extends Component {
+class PMProfileDetails extends Component {
   render() {
     return (
       <div>
@@ -12,14 +12,14 @@ class ProfileDetails extends Component {
               <div className="col-lg-12 empDashboardUserDetailsColOne">
                 <img
                   className="empDashboardImage img-fluid"
-                  src={this.props.singleEmployee.profileImg}
+                  src={this.props.singleProjectManager.profileImg}
                   alt="empImage"
                 />
               </div>
               <div className="col-lg-12 empDashboardUserDetailsTwo mt-2 text-center">
-                <h6>{this.props.singleEmployee.name}</h6>
-                <h6 className="text-muted">{this.props.singleEmployee.username}</h6>
-                <h6 className="text-muted">{this.props.singleEmployee.department}</h6>
+                <h6>{this.props.singleProjectManager.name}</h6>
+                <h6 className="text-muted">{this.props.singleProjectManager.username}</h6>
+                <h6 className="text-muted">Product Manager</h6>
                 <h1>
                   <Clock format="HH:mm:ss" interval={1000} ticking={true} />
                 </h1>
@@ -33,10 +33,10 @@ class ProfileDetails extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  singleEmployee: state.employeeReducer.singleEmployee,
+  singleProjectManager: state.projectManagerReducer.singleProjectManager,
 });
 
 export default connect(
   mapStateToProps,
   null
-)(ProfileDetails);
+)(PMProfileDetails);

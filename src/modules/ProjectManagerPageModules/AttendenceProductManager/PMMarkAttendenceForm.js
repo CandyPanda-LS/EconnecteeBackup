@@ -3,12 +3,12 @@ import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Button, Form, Label, FormGroup, Input } from "reactstrap";
-import WebcamValidator from "./WebcamValidator";
-import WebcamValidatorOutTime from "./WebcamValidatorOutTime"
+import PMWebcamValidator from "./PMWebcamValidator";
+import PMWebcamValidatorOutTime from "./PMWebcamValidatorOutTime"
 import { connect } from "react-redux";
-import * as actions from "../../../store/actions/EmployeeActions";
+import * as actions from "../../../store/actions/ProjectManagerActions";
 
-class MarkAttendenceForm extends Component {
+class PMMarkAttendenceForm extends Component {
   constructor(props) {
     super(props);
 
@@ -24,8 +24,8 @@ class MarkAttendenceForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.singleEmployee !== nextProps.singleEmployee) {
-      this.props.fetchEmployee();
+    if (this.props.singleProjectManager !== nextProps.singleProjectManager) {
+      this.props.fetchProjectManagerDetails();
     }
   }
 
@@ -61,7 +61,7 @@ class MarkAttendenceForm extends Component {
                     <Form>
                       <FormGroup className="mt-2">
                         <Label for="inTime">In Time</Label>
-                        <Input type="text" name="inTime" id="inTime" value={this.props.singleEmployee && this.props.singleEmployee.attendanceList[0].inTime ? this.props.singleEmployee.attendanceList[0].inTime : ""} disabled />
+                        <Input type="text" name="inTime" id="inTime" value={this.props.singleProjectManager && this.props.singleProjectManager.attendanceList.length > 0 ? this.props.singleProjectManager.attendanceList[0].inTime : ""} disabled />
                       </FormGroup>
                       <FormGroup className="mt-2">
                         <Button
@@ -84,7 +84,7 @@ class MarkAttendenceForm extends Component {
                     <Form>
                       <FormGroup className="mt-2">
                         <Label for="outTime">Out Time</Label>
-                        <Input type="text" name="outTime" id="outTime" value={this.props.singleEmployee && this.props.singleEmployee.attendanceList[0].outTime ? this.props.singleEmployee.attendanceList[0].outTime : ""} disabled  />
+                        <Input type="text" name="outTime" id="outTime" value={this.props.singleProjectManager && this.props.singleProjectManager.attendanceList.length > 0  ? this.props.singleProjectManager.attendanceList[0].outTime : ""} disabled  />
                       </FormGroup>
                       <FormGroup className="mt-2">
                         <Button
@@ -112,7 +112,7 @@ class MarkAttendenceForm extends Component {
             CONFIRM IN TIME
           </ModalHeader>
           <ModalBody>
-            <WebcamValidator selectedDate={this.state.selectedDate} timeSlot="IN TIME" />
+            <PMWebcamValidator selectedDate={this.state.selectedDate} timeSlot="IN TIME" />
           </ModalBody>
         </Modal>
 
@@ -125,7 +125,7 @@ class MarkAttendenceForm extends Component {
             CONFIRM OUT TIME
           </ModalHeader>
           <ModalBody>
-            <WebcamValidatorOutTime timeSlot="OUT TIME" />
+            <PMWebcamValidatorOutTime timeSlot="OUT TIME" />
           </ModalBody>
         </Modal>
 
@@ -136,14 +136,14 @@ class MarkAttendenceForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  singleEmployee: state.employeeReducer.singleEmployee,
+  singleProjectManager: state.projectManagerReducer.singleProjectManager,
 });
 
 const mapActionToProps = {
-  fetchEmployee: actions.fetchEmployee,
+  fetchProjectManagerDetails: actions.fetchProjectManagerDetails,
 };
 
 export default connect(
   mapStateToProps,
   mapActionToProps
-)(MarkAttendenceForm);
+)(PMMarkAttendenceForm);

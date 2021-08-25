@@ -61,7 +61,7 @@ class MarkAttendenceForm extends Component {
                     <Form>
                       <FormGroup className="mt-2">
                         <Label for="inTime">In Time</Label>
-                        <Input type="text" name="inTime" id="inTime" value={this.props.singleEmployee && this.props.singleEmployee.attendanceList[0].inTime ? this.props.singleEmployee.attendanceList[0].inTime : ""} disabled />
+                        <Input type="text" name="inTime" id="inTime" value={this.props.singleEmployee && this.props.singleEmployee.attendanceList.length > 0 ? this.props.singleEmployee.attendanceList[0].inTime : ""} disabled />
                       </FormGroup>
                       <FormGroup className="mt-2">
                         <Button
@@ -84,7 +84,7 @@ class MarkAttendenceForm extends Component {
                     <Form>
                       <FormGroup className="mt-2">
                         <Label for="outTime">Out Time</Label>
-                        <Input type="text" name="outTime" id="outTime" value={this.props.singleEmployee && this.props.singleEmployee.attendanceList[0].outTime ? this.props.singleEmployee.attendanceList[0].outTime : ""} disabled  />
+                        <Input type="text" name="outTime" id="outTime" value={this.props.singleEmployee &&  this.props.singleEmployee.attendanceList.length > 0 ? this.props.singleEmployee.attendanceList[0].outTime : ""} disabled  />
                       </FormGroup>
                       <FormGroup className="mt-2">
                         <Button

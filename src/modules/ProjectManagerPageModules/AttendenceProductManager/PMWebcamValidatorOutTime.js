@@ -6,10 +6,10 @@ import axios from "axios";
 import { storage } from "../../../firebase";
 import Progress from "../../../common/ProgressBar/progress";
 import { connect } from "react-redux";
-import * as actions from "../../../store/actions/EmployeeActions";
+import * as actions from "../../../store/actions/ProjectManagerActions";
 import date from "date-and-time";
 
-function WebcamValidatorOutTime(props) {
+function PMWebcamValidatorOutTime(props) {
   //states for webcam
   const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState("");
@@ -66,7 +66,7 @@ function WebcamValidatorOutTime(props) {
                 headers: {
                   "Content-Type": "application/json",
                   "Ocp-Apim-Subscription-Key":
-                    "a680691db6174916bb8819e75475a406",
+                    "cc8d3f8f4b23401c9e3b36474ecce84d",
                 },
               };
 
@@ -86,7 +86,7 @@ function WebcamValidatorOutTime(props) {
 
                   const newUserLogin = {
                     faceId: response.data[0].faceId,
-                    largeFaceListId: "hexalist",
+                    largeFaceListId: "productmanagerlist",
                     maxNumOfCandidatesReturned: 10,
                     mode: "matchPerson",
                   };
@@ -102,7 +102,7 @@ function WebcamValidatorOutTime(props) {
                       axios
                         .get(
                           process.env.REACT_APP_BACKEND_URL +
-                            "/api/employee/confirmface/" +
+                            "/api/projectmanager/confirmface/" +
                             res.data[0].persistedFaceId
                         )
                         .then(async (responseFromBackend) => {
@@ -126,14 +126,14 @@ function WebcamValidatorOutTime(props) {
                             );
 
                             await props.confirmOutTime(
-                              props.singleEmployee.attendanceList[0]._id,
+                              props.singleProjectManager.attendanceList[0]._id,
                               attendenceObj,
                               () => {
                                 setStateOfProcess(
                                   "Attendence Added " +
                                     responseFromBackend.data.name
                                 );
-                                props.fetchEmployee();
+                                props.fetchProjectManagerDetails();
                               },
                               () => {}
                             );
@@ -210,15 +210,15 @@ function WebcamValidatorOutTime(props) {
 }
 
 const mapStateToProps = (state) => ({
-  singleEmployee: state.employeeReducer.singleEmployee,
+  singleProjectManager: state.projectManagerReducer.singleProjectManager,
 });
 
 const mapActionToProps = {
   confirmOutTime: actions.confirmOutTime,
-  fetchEmployee: actions.fetchEmployee,
+  fetchProjectManagerDetails: actions.fetchProjectManagerDetails,
 };
 
 export default connect(
   mapStateToProps,
   mapActionToProps
-)(WebcamValidatorOutTime);
+)(PMWebcamValidatorOutTime);
