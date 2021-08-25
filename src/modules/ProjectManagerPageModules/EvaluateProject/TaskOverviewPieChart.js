@@ -1,14 +1,19 @@
-import React from "react";
+import React,{useState} from "react";
 import { Doughnut } from "react-chartjs-2";
 
 export default function TaskOverviewPieChart(props) {
+
+  const [toDoCount, settoDoCount] = useState(props.tasks ? props.tasks.toDoList.length : 0)
+  const [inProgressCount, setinProgressCount] = useState(props.tasks ? props.tasks.inProgressList.length : 0)
+  const [doneCount, setdoneCount] = useState(props.tasks ? props.tasks.doneList.length : 0)
+
   const pieChart = (
     <Doughnut
       data={{
         labels: ["To do", "In Progress", "Done"],
         datasets: [
           {
-            data: [props.tasks.toDoList.length, props.tasks.inProgressList.length, props.tasks.doneList.length],
+            data: [toDoCount,inProgressCount, doneCount],
             backgroundColor: [
               "#bf00c2",
               "#ff2684",
