@@ -1,23 +1,20 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-export default function TaskOverviewPieChart() {
+export default function TaskOverviewPieChart(props) {
   const pieChart = (
     <Doughnut
       data={{
-        labels: ["Completed", "To do", "Done"],
+        labels: ["To do", "In Progress", "Done"],
         datasets: [
           {
-            data: [5, 10, 20],
+            data: [props.tasks.toDoList.length, props.tasks.inProgressList.length, props.tasks.doneList.length],
             backgroundColor: [
               "#bf00c2",
               "#ff2684",
               "#3254a8",
-              "#3da19c",
-              "#06adbf",
-              "#f7d619",
             ],
-            label: "Weight",
+            label: "Tasks",
           },
         ],
       }}

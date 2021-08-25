@@ -41,7 +41,7 @@ export default class index extends Component {
           <Route path="/empprojects" exact component={EmployeeProjectsPage} />
           <Route path="/empsingleproject/:projectid" exact component={EmployeeSingleProject} />
           <Route path="/evaluateemployee" exact component={EvaluateEmployeePage} />
-          <Route path="/evaluateproject" exact component={EvaluateProjectPage} />
+          <Route path="/projectdashboard/:projectid/evaluateproject" exact component={EvaluateProjectPage} />
           <Route path="/pmregister" exact component={ProjectManagerRegistrationPage} />
           <Route path="/pmdashboard" exact component={ProjectManagerDashboardPage} />
           <Route path="/projectdashboard/:projectid/sprintbacklog" exact component={SprintBacklog} />

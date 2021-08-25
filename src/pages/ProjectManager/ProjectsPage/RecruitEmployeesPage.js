@@ -11,6 +11,12 @@ class RecruitEmployeesPage extends Component {
     this.props.fetchProjectById(this.props.match.params.projectid);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.singleProject !== nextProps.singleProject) {
+      this.props.fetchProjectById(this.props.match.params.projectid);
+    }
+  }
+
   render() {
     return (
       <div className="container">

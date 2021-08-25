@@ -39,7 +39,7 @@ export default class ProjectCardSection extends Component {
               </Link>
             </div>
             <div className="col-lg-4 p-3">
-              <Link to="/evaluateproject">
+              <Link to={`${window.location.pathname}/evaluateproject`}>
                 <div className="card projectDashboardCard boderRadiusCards">
                   <div className="card-body projectDashboardCardFour">
                   <h5 style={{fontFamily:"Orbitron",fontSize:"40px",color:"#470912"}}>Evaluate</h5>

@@ -28,6 +28,7 @@ class CreateSprintForm extends Component {
       this.props.projectId,
       newSprint,
       () => {
+        this.props.fetchProjectById(this.props.projectId);
         toast.success("Sprint created", {
           autoClose: 2500,
         });
@@ -82,6 +83,7 @@ class CreateSprintForm extends Component {
 
 const mapActionToProps = {
   addSprintToProject: actions.addSprintToProject,
+  fetchProjectById : actions.fetchProjectById
 };
 
 export default connect(null, mapActionToProps)(CreateSprintForm);

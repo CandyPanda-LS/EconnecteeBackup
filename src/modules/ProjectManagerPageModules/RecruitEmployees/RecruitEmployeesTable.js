@@ -1,36 +1,47 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as projectActions from "../../../store/actions/ProjectActions";
+import "./RecruitEmployeesTable.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class RecruitEmployeesTable extends Component {
   constructor(props) {
     super(props);
     this.OnAddEmployeeToProject = this.OnAddEmployeeToProject.bind(this);
     this.state = {
-      existEmpArray:[]
-    }
+      existEmpArray: [],
+    };
   }
 
- componentDidMount(){
+  componentDidMount() {
     let localArray = [];
     this.props.empListInProject.map((employee) => {
       localArray.push(employee._id);
     });
-    this.setState({existEmpArray:localArray});
+    this.setState({ existEmpArray: localArray });
   }
 
-  OnAddEmployeeToProject(empId) {
+  async OnAddEmployeeToProject(empId) {
     const employeeObj = {
-      employee:{
-        _id: empId
-      }
+      employee: {
+        _id: empId,
+      },
     };
-    console.log(employeeObj)
-    this.props.addEmployeeToProject(
+    await this.props.addEmployeeToProject(
       this.props.projectId,
       employeeObj,
-      () => {},
-      () => {}
+      async () => {
+        await toast.success("Recruit employee", {
+          autoClose: 2500,
+        });
+        window.location = `/projectdashboard/${this.props.projectId}/addmemberproject`;
+      },
+      () => {
+        toast.error("Something went wrong", {
+          autoClose: 2500,
+        });
+      }
     );
   }
 
@@ -53,17 +64,21 @@ class RecruitEmployeesTable extends Component {
                       if (employee.department === "Development") {
                         return (
                           <tr>
-                            <td>{++index}</td>
-                            <td>{employee.username}</td>
-                            <td>{employee.name}</td>
-                            <td>
-                              {this.state.existEmpArray.includes(employee._id) ? (
-                                <button className="btn btn-danger empTableBtn">
+                            <td className="tableDataWidth">{++index}</td>
+                            <td className="tableDataWidth">
+                              {employee.username}
+                            </td>
+                            <td className="tableDataWidth">{employee.name}</td>
+                            <td className="tableDataWidth">
+                              {this.state.existEmpArray.includes(
+                                employee._id
+                              ) ? (
+                                <button className="btn tableDataBtn empTableBtn">
                                   <i class="bi bi-dash-lg"></i>
                                 </button>
                               ) : (
                                 <button
-                                  className="btn btn-primary empTableBtn"
+                                  className="btn tableDataBtn empTableBtn"
                                   onClick={() => {
                                     this.OnAddEmployeeToProject(employee._id);
                                   }}
@@ -95,17 +110,21 @@ class RecruitEmployeesTable extends Component {
                       if (employee.department === "Marketing") {
                         return (
                           <tr>
-                            <td>{++index}</td>
-                            <td>{employee.username}</td>
-                            <td>{employee.name}</td>
-                            <td>
-                              {this.state.existEmpArray.includes(employee._id)? (
-                                <button className="btn btn-danger empTableBtn">
+                            <td className="tableDataWidth">{++index}</td>
+                            <td className="tableDataWidth">
+                              {employee.username}
+                            </td>
+                            <td className="tableDataWidth">{employee.name}</td>
+                            <td className="tableDataWidth">
+                              {this.state.existEmpArray.includes(
+                                employee._id
+                              ) ? (
+                                <button className="btn tableDataBtn empTableBtn">
                                   <i class="bi bi-dash-lg"></i>
                                 </button>
                               ) : (
                                 <button
-                                  className="btn btn-primary empTableBtn"
+                                  className="btn tableDataBtn empTableBtn"
                                   onClick={() => {
                                     this.OnAddEmployeeToProject(employee._id);
                                   }}
@@ -137,17 +156,21 @@ class RecruitEmployeesTable extends Component {
                       if (employee.department === "Quality Assurance") {
                         return (
                           <tr>
-                            <td>{++index}</td>
-                            <td>{employee.username}</td>
-                            <td>{employee.name}</td>
-                            <td>
-                              {this.state.existEmpArray.includes(employee._id) ? (
-                                <button className="btn btn-danger empTableBtn">
+                            <td className="tableDataWidth">{++index}</td>
+                            <td className="tableDataWidth">
+                              {employee.username}
+                            </td>
+                            <td className="tableDataWidth">{employee.name}</td>
+                            <td className="tableDataWidth">
+                              {this.state.existEmpArray.includes(
+                                employee._id
+                              ) ? (
+                                <button className="btn tableDataBtn empTableBtn">
                                   <i class="bi bi-dash-lg"></i>
                                 </button>
                               ) : (
                                 <button
-                                  className="btn btn-primary empTableBtn"
+                                  className="btn tableDataBtn empTableBtn"
                                   onClick={() => {
                                     this.OnAddEmployeeToProject(employee._id);
                                   }}
@@ -166,6 +189,7 @@ class RecruitEmployeesTable extends Component {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }
@@ -173,6 +197,7 @@ class RecruitEmployeesTable extends Component {
 
 const mapActionToProps = {
   addEmployeeToProject: projectActions.addEmployeeToProject,
+  fetchProjectById: projectActions.fetchProjectById,
 };
 
 export default connect(null, mapActionToProps)(RecruitEmployeesTable);

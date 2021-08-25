@@ -11,8 +11,10 @@ class SprintBacklog extends Component {
     this.props.fetchProjectById(this.props.match.params.projectid);
   }
 
-  componentWillReceiveProps(){
-    
+  componentWillReceiveProps(nextProps) {
+    if (this.props.singleProject !== nextProps.singleProject) {
+      this.props.fetchProjectById(this.props.match.params.projectid);
+    }
   }
 
   render() {
