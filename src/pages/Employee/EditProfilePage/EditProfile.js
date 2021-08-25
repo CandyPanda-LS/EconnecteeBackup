@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import axios from "axios";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -15,15 +16,19 @@ class EditProfile extends Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.onEditProfile = this.onEditProfile.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
-    this.state = {
-      id: this.props.currentEmployee._id,
-      name: this.props.currentEmployee.name,
-      username: this.props.currentEmployee.username,
-      password: "",
-      contactnumber: this.props.currentEmployee.mobileNumber,
-      profileImage: this.props.currentEmployee.profileImg,
-      uploadProfilePercentage: 0,
-    };
+    this.onTrainProfileImage =this.onTrainProfileImage.bind(this);
+      this.state = {
+        id: this.props.currentEmployee ? this.props.currentEmployee._id : null,
+        name: this.props.currentEmployee ? this.props.currentEmployee.name : null,
+        username: this.props.currentEmployee ? this.props.currentEmployee.username : null,
+        password: "",
+        contactnumber: this.props.currentEmployee ? this.props.currentEmployee.mobileNumber :null,
+        profileImage: this.props.currentEmployee ? this.props.currentEmployee.profileImg : null,
+        persistedFaceId:"",
+        uploadProfilePercentage: 0,
+        processStatus:""
+      };
+
   }
 
   uploadImage(e) {
@@ -52,11 +57,66 @@ class EditProfile extends Component {
             .getDownloadURL()
             .then((url) => {
               this.setState({ profileImage: url });
+              this.onTrainProfileImage(url)
             });
         }
       );
     } else {
     }
+  }
+
+  onTrainProfileImage(imageUrl){
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Ocp-Apim-Subscription-Key":
+          "a680691db6174916bb8819e75475a406",
+      },
+    };
+
+    const newImageDetails = {
+      url: imageUrl,
+    };
+
+    axios
+      .post(
+        "https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/hexalist/persistedfaces?detectionModel=detection_01",
+        newImageDetails,
+        config
+      )
+      .then((response) => {
+        console.log(
+          "Response for LargeFaceList is = " +
+            response.data.persistedFaceId
+        );
+        this.setState({persistedFaceId:response.data.persistedFaceId});
+        //alert("Image added to Large Face List");
+        this.setState({ processStatus:"Processing..."});
+
+        const configTrain = {
+          headers: {
+            "Ocp-Apim-Subscription-Key":
+              "a680691db6174916bb8819e75475a406",
+          },
+        };
+
+        axios
+          .post(
+            "https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/hexalist/train",
+            "",
+            configTrain
+          )
+          .then(() => {
+            this.setState({ processStatus:"Trained Successfully"});
+          })
+          .catch((err) => {
+            alert(err);
+          });
+
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   }
 
   onEditProfile(e) {
@@ -68,6 +128,7 @@ class EditProfile extends Component {
       password: this.state.password,
       mobileNumber: this.state.contactnumber,
       profileImg: this.state.profileImage,
+      persistedFaceId: this.state.persistedFaceId
     };
     this.props.updateEmployee(
       this.state.id,
@@ -180,6 +241,7 @@ class EditProfile extends Component {
                     <label htmlFor="profile-image" className="form-label">
                       Profile Image
                     </label>
+                    <h6>{this.state.processStatus}</h6>
                     <div className="input-group">
                       <input
                         type="file"

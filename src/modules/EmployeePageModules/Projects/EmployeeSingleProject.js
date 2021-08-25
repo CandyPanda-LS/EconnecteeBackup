@@ -9,8 +9,6 @@ import DoneTasks from "./DoneTasks";
 import InProgressTasks from "./InProgressTasks";
 import TodoTask from "./TodoTask";
 
-
-
 class EmployeeSingleProject extends Component {
   constructor(props) {
     super(props);
@@ -22,22 +20,34 @@ class EmployeeSingleProject extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchEmployee(()=>{    const selectedProject = this.props.currentEmployee.projectsList.filter(
-      (singleProj) => singleProj._id == this.props.match.params.projectid
+    this.props.fetchEmployee(
+      () => {
+        const selectedProject = this.props.currentEmployee.projectsList.filter(
+          (singleProj) => singleProj._id == this.props.match.params.projectid
+        );
+        this.setState({
+          project: selectedProject[0],
+        });
+      },
+      () => {}
     );
-    this.setState({
-      project: selectedProject[0],
-    })},()=>{});
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.currentEmployee !== nextProps.currentEmployee) {
-      this.props.fetchEmployee(()=>{    const selectedProject = this.props.currentEmployee.projectsList.filter(
-        (singleProj) => singleProj._id == this.props.match.params.projectid
+      this.props.fetchEmployee(
+        () => {
+          const selectedProject =
+            this.props.currentEmployee.projectsList.filter(
+              (singleProj) =>
+                singleProj._id == this.props.match.params.projectid
+            );
+          this.setState({
+            project: selectedProject[0],
+          });
+        },
+        () => {}
       );
-      this.setState({
-        project: selectedProject[0],
-      })},()=>{});
     }
   }
 
@@ -52,13 +62,23 @@ class EmployeeSingleProject extends Component {
           <div className="container">
             <div className="row mt-4 mb-2">
               <div className="col-md-12">
-                <h1 className="text-left mb-4" style={{fontFamily:"Orbitron"}}>
+                <h1
+                  className="text-left mb-4"
+                  style={{ fontFamily: "Orbitron" }}
+                >
                   {this.state.project.projectName}
                 </h1>
-                <h1 className="text-left mb-4" style={{fontFamily:"Orbitron",fontSize:"15px",color:"#808080"}}>
+                <h1
+                  className="text-left mb-4"
+                  style={{
+                    fontFamily: "Orbitron",
+                    fontSize: "15px",
+                    color: "#808080",
+                  }}
+                >
                   {`Project Manager: ${this.state.project.projectManager.name}`}
                 </h1>
-              
+
                 {/* <button
                   className="btn sprintTableBtn  mb-3"
                   onClick={this.toggleFeedbackForm}
@@ -66,26 +86,31 @@ class EmployeeSingleProject extends Component {
                   ADD FEEDBACK
                 </button> */}
               </div>
-
-              <div className="col-md-4">
-                <TodoTask
-                  sprintId={this.state.project.sprintList[0]._id}
-                  toDoList={this.state.project.sprintList[0].toDoList}
-                />
-              </div>
-              <div className="col-md-4">
-                <InProgressTasks
-                  sprintId={this.state.project.sprintList[0]._id}
-                  inProgressList={
-                    this.state.project.sprintList[0].inProgressList
-                  }
-                />
-              </div>
-              <div className="col-md-4">
-                <DoneTasks
-                  doneList={this.state.project.sprintList[0].doneList}
-                />
-              </div>
+              {this.state.project.sprintList[0] ? (
+                <>
+                  <div className="col-md-4">
+                    <TodoTask
+                      sprintId={this.state.project.sprintList[0]._id}
+                      toDoList={this.state.project.sprintList[0].toDoList}
+                    />
+                  </div>
+                  <div className="col-md-4">
+                    <InProgressTasks
+                      sprintId={this.state.project.sprintList[0]._id}
+                      inProgressList={
+                        this.state.project.sprintList[0].inProgressList
+                      }
+                    />
+                  </div>
+                  <div className="col-md-4">
+                    <DoneTasks
+                      doneList={this.state.project.sprintList[0].doneList}
+                    />
+                  </div>
+                </>
+              ) : (
+               <p>No Sprint</p> 
+              )}
             </div>
             {/* Modals Section */}
             {/* Create Feedback form Modal */}

@@ -9,7 +9,8 @@ const config = {
 const authEmployeeApi = {
   authEmployee() {
     return {
-      
+      confirmOutTime: (attendenceId,confirmOutTimeObj) => axios.put(`${baseUrl}/api/employee/confirmouttime/${attendenceId}`,confirmOutTimeObj),
+      confirmInTime: (employeeId,confirmInTimeObj) => axios.put(`${baseUrl}/api/employee/confirmintime/${employeeId}`,confirmInTimeObj),
       getEmployeeDetails: () => axios.get(baseUrl + "/api/employee",config),
       fetchAllEmployeeList: () => axios.get(baseUrl + "/api/employee/all"),
       deleteEmployee: (employeeId) => axios.delete(baseUrl + "/api/employee/" +employeeId ),
@@ -22,4 +23,5 @@ const authEmployeeApi = {
     };
   },
 };
+
 export default authEmployeeApi;

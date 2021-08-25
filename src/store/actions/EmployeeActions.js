@@ -86,3 +86,40 @@ export const updateEmployee =
         OnFailure();
       });
   };
+
+
+  export const confirmInTime =
+  (employeeId, data, OnSuccess, OnFailure) => (dispatch) => {
+    console.log("employe action ",employeeId,data)
+    employeeAPI
+      .authEmployee()
+      .confirmInTime(employeeId, data)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.UPDATE_EMPLOYEE,
+          payload: response.data,
+        });
+        OnSuccess();
+      })
+      .catch(() => {
+        OnFailure();
+      });
+  };
+
+  export const confirmOutTime =
+  (attendenceId, data, OnSuccess, OnFailure) => (dispatch) => {
+    console.log("employe action ",attendenceId,data)
+    employeeAPI
+      .authEmployee()
+      .confirmOutTime(attendenceId, data)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.UPDATE_EMPLOYEE,
+          payload: response.data,
+        });
+        OnSuccess();
+      })
+      .catch(() => {
+        OnFailure();
+      });
+  };

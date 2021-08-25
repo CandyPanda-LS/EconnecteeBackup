@@ -7,9 +7,9 @@ import { storage } from "../../../firebase";
 import Progress from "../../../common/ProgressBar/progress";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/EmployeeActions";
-import date from 'date-and-time';
+import date from "date-and-time";
 
-function WebcamValidator(props) {
+function WebcamValidatorOutTime(props) {
   //states for webcam
   const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState("");
@@ -117,17 +117,16 @@ function WebcamValidator(props) {
                           ) {
                             const now = new Date();
                             const attendenceObj = {
-                              inTime:date.format(now, 'hh:mm A [GMT]Z'),
-                              date:date.format(props.selectedDate, 'ddd, MMM DD YYYY'),
+                              outTime: date.format(now, "hh:mm A [GMT]Z"),
                             };
-                            console.log(attendenceObj)
+                            console.log(attendenceObj);
                             await setStateOfProcess(
-                                  "Authenticated User : " +
-                                    responseFromBackend.data.name
-                                );
+                              "Authenticated User " +
+                                responseFromBackend.data.name
+                            );
 
-                            await props.confirmInTime(
-                              responseFromBackend.data._id,
+                            await props.confirmOutTime(
+                              props.singleEmployee.attendanceList[0]._id,
                               attendenceObj,
                               () => {
                                 setStateOfProcess(
@@ -138,7 +137,6 @@ function WebcamValidator(props) {
                               },
                               () => {}
                             );
-
                           }
                         })
                         .catch(() => {
@@ -199,7 +197,7 @@ function WebcamValidator(props) {
 
           <div>
             <div class="form-group mt-2 mb-2">
-            <h6>{StateOfProcess}</h6>
+              <h6>{StateOfProcess}</h6>
             </div>
             <div class="form-group">
               <Progress percentage={uploadPercentage} />
@@ -211,9 +209,16 @@ function WebcamValidator(props) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  singleEmployee: state.employeeReducer.singleEmployee,
+});
+
 const mapActionToProps = {
-  confirmInTime: actions.confirmInTime,
-  fetchEmployee: actions.fetchEmployee
+  confirmOutTime: actions.confirmOutTime,
+  fetchEmployee: actions.fetchEmployee,
 };
 
-export default connect(null, mapActionToProps)(WebcamValidator);
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(WebcamValidatorOutTime);
