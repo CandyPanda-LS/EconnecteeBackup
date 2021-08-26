@@ -4,17 +4,27 @@ import * as actions from "../../../store/actions/authActions";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Form, FormGroup, Input } from "reactstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import PMLoginFaceAuth from "./PMLoginFaceAuth";
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.onLogin = this.onLogin.bind(this);
+    this.toggleProjectManagerModal = this.toggleProjectManagerModal.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      modalProjectManager: false
     };
   }
+
+  toggleProjectManagerModal = () => {
+    this.setState({
+      modalProjectManager: !this.state.modalProjectManager,
+    });
+  };
 
   onValueChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -116,8 +126,27 @@ class LoginForm extends Component {
         <div className="mt-2 mb-5">
           <p>or</p>
           <a href="/">Register Here !</a>
+          {/* <Button className="mt-2 loginBtn" onClick={()=>{
+            this.toggleProjectManagerModal()
+          }}>Login With Face</Button> */}
         </div>
         <ToastContainer />
+           {/* Modals Section */}
+
+        {/* Login Project Manager Modal */}
+        <Modal
+          isOpen={this.state.modalProjectManager}
+          toggle={this.toggleProjectManagerModal}
+        >
+          <ModalHeader toggle={this.toggleProjectManagerModal}>
+           PROJECT MANAGER LOGIN
+          </ModalHeader>
+          <ModalBody>
+            <PMLoginFaceAuth />
+          </ModalBody>
+        </Modal>
+
+        {/* End of Modals Section */}
       </div>
     );
   }

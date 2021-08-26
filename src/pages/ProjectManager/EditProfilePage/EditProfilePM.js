@@ -24,8 +24,11 @@ class EditProfilePM extends Component {
       contactnumber: this.props.currentPM.mobileNumber,
       profileImage: this.props.currentPM.profileImg,
       uploadProfilePercentage: 0,
-      persistedFaceId:"",
-      processStatus:""
+      persistedFaceId:
+      this.props.currentEmployee && this.props.currentEmployee.persistedFaceId
+        ? this.props.currentEmployee.persistedFaceId
+        : null,
+      processStatus: "",
     };
   }
 
@@ -55,7 +58,7 @@ class EditProfilePM extends Component {
             .getDownloadURL()
             .then((url) => {
               this.setState({ profileImage: url });
-              this.onTrainProfileImage(url)
+              this.onTrainProfileImage(url);
             });
         }
       );
@@ -63,13 +66,20 @@ class EditProfilePM extends Component {
     }
   }
 
-  onTrainProfileImage(imageUrl) {
+  onTrainProfileImage = async (imageUrl) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
         "Ocp-Apim-Subscription-Key": "cc8d3f8f4b23401c9e3b36474ecce84d",
       },
     };
+
+    if (this.state.persistedFaceId) {
+      await axios.delete(
+        `https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/employeelist/persistedfaces/${this.state.persistedFaceId}`,
+        config
+      );
+    }
 
     const newImageDetails = {
       url: imageUrl,
@@ -111,7 +121,7 @@ class EditProfilePM extends Component {
       .catch((err) => {
         alert(err.message);
       });
-  }
+  };
 
   onEditProfile(e) {
     e.preventDefault();
@@ -122,7 +132,7 @@ class EditProfilePM extends Component {
       password: this.state.password,
       mobileNumber: this.state.contactnumber,
       profileImg: this.state.profileImage,
-      persistedFaceId: this.state.persistedFaceId
+      persistedFaceId: this.state.persistedFaceId,
     };
     this.props.updateProjectManager(
       this.state.id,

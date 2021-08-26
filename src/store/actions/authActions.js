@@ -167,6 +167,33 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
       });
   };
 
+  export const productManagerLoginWithFaceAuth = (data, OnSuccess, OnFailure) => (dispatch) => {
+    console.log(data)
+    ProjectManagerAPI
+      .authProjectManager()
+      .loginWithFaceAuth(data)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.LOGIN_SUCCESS,
+          payload: response.data.token,
+        });
+  
+        if (response.data.token) {
+          localStorage.setItem("x-auth-token", response.data.token);
+          localStorage.setItem("role","PM");
+
+        }
+        OnSuccess();
+      })
+      .catch(() => {
+        dispatch({
+          type: ACTION_TYPES.LOGIN_FAIL,
+          payload: null,
+        });
+        OnFailure();
+      });
+  };
+
   export const logout = () => (dispatch) => {
     localStorage.removeItem("x-auth-token");
     dispatch({

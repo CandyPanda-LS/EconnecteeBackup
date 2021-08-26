@@ -16,19 +16,27 @@ class EditProfile extends Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.onEditProfile = this.onEditProfile.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
-    this.onTrainProfileImage =this.onTrainProfileImage.bind(this);
-      this.state = {
-        id: this.props.currentEmployee ? this.props.currentEmployee._id : null,
-        name: this.props.currentEmployee ? this.props.currentEmployee.name : null,
-        username: this.props.currentEmployee ? this.props.currentEmployee.username : null,
-        password: "",
-        contactnumber: this.props.currentEmployee ? this.props.currentEmployee.mobileNumber :null,
-        profileImage: this.props.currentEmployee ? this.props.currentEmployee.profileImg : null,
-        persistedFaceId:"",
-        uploadProfilePercentage: 0,
-        processStatus:""
-      };
-
+    this.onTrainProfileImage = this.onTrainProfileImage.bind(this);
+    this.state = {
+      id: this.props.currentEmployee ? this.props.currentEmployee._id : null,
+      name: this.props.currentEmployee ? this.props.currentEmployee.name : null,
+      username: this.props.currentEmployee
+        ? this.props.currentEmployee.username
+        : null,
+      password: "",
+      contactnumber: this.props.currentEmployee
+        ? this.props.currentEmployee.mobileNumber
+        : null,
+      profileImage: this.props.currentEmployee
+        ? this.props.currentEmployee.profileImg
+        : null,
+      persistedFaceId:
+        this.props.currentEmployee && this.props.currentEmployee.persistedFaceId
+          ? this.props.currentEmployee.persistedFaceId
+          : null,
+      uploadProfilePercentage: 0,
+      processStatus: "",
+    };
   }
 
   uploadImage(e) {
@@ -57,7 +65,7 @@ class EditProfile extends Component {
             .getDownloadURL()
             .then((url) => {
               this.setState({ profileImage: url });
-              this.onTrainProfileImage(url)
+              this.onTrainProfileImage(url);
             });
         }
       );
@@ -65,14 +73,19 @@ class EditProfile extends Component {
     }
   }
 
-  onTrainProfileImage(imageUrl){
+  onTrainProfileImage = async (imageUrl) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        "Ocp-Apim-Subscription-Key":
-          "cc8d3f8f4b23401c9e3b36474ecce84d",
+        "Ocp-Apim-Subscription-Key": "cc8d3f8f4b23401c9e3b36474ecce84d",
       },
     };
+
+    if (this.state.persistedFaceId) {
+      await axios.delete(
+        `https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/employeelist/persistedfaces/${this.state.persistedFaceId}`,config
+      );
+    }
 
     const newImageDetails = {
       url: imageUrl,
@@ -86,17 +99,15 @@ class EditProfile extends Component {
       )
       .then((response) => {
         console.log(
-          "Response for LargeFaceList is = " +
-            response.data.persistedFaceId
+          "Response for LargeFaceList is = " + response.data.persistedFaceId
         );
-        this.setState({persistedFaceId:response.data.persistedFaceId});
+        this.setState({ persistedFaceId: response.data.persistedFaceId });
         //alert("Image added to Large Face List");
-        this.setState({ processStatus:"Processing..."});
+        this.setState({ processStatus: "Processing..." });
 
         const configTrain = {
           headers: {
-            "Ocp-Apim-Subscription-Key":
-              "cc8d3f8f4b23401c9e3b36474ecce84d",
+            "Ocp-Apim-Subscription-Key": "cc8d3f8f4b23401c9e3b36474ecce84d",
           },
         };
 
@@ -107,17 +118,16 @@ class EditProfile extends Component {
             configTrain
           )
           .then(() => {
-            this.setState({ processStatus:"Trained Successfully"});
+            this.setState({ processStatus: "Trained Successfully" });
           })
           .catch((err) => {
             alert(err);
           });
-
       })
       .catch((err) => {
         alert(err.message);
       });
-  }
+  };
 
   onEditProfile(e) {
     e.preventDefault();
@@ -128,7 +138,7 @@ class EditProfile extends Component {
       password: this.state.password,
       mobileNumber: this.state.contactnumber,
       profileImg: this.state.profileImage,
-      persistedFaceId: this.state.persistedFaceId
+      persistedFaceId: this.state.persistedFaceId,
     };
     this.props.updateEmployee(
       this.state.id,
@@ -138,7 +148,7 @@ class EditProfile extends Component {
         toast.success("Profile Edited", {
           autoClose: 2000,
         });
-        window.location="/employeedashboard"
+        window.location = "/employeedashboard";
       },
       () => {
         // this.props.fetchProjectById(this.props.projectId)
@@ -272,7 +282,7 @@ class EditProfile extends Component {
                     </button>
                   </div>
                 </Form>
-                <ToastContainer/>
+                <ToastContainer />
               </div>
             </div>
           </div>
