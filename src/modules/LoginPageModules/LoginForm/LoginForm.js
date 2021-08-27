@@ -156,7 +156,22 @@ class LoginForm extends Component {
           </Button>
         </div>
         <hr />
-        <a href="/">Register Here !</a>
+        <div className="row">
+          <div className="col-md-6">
+            <a href="/pmlogin">PRODUCT MANAGER</a>
+          </div>
+          <div className="col-md-6">
+            <a href="/adminlogin">ADMIN</a>
+          </div>
+        </div>
+
+        {this.props.role === "PROJECT MANAGER" ? (
+          <a href="/pmregister">Register Here !</a>
+        ) : this.props.role === "ADMIN" ? (
+          <a href="/adminregister">Register Here !</a>
+        ) : (
+          ""
+        )}
 
         <ToastContainer />
         {/* Modals Section */}

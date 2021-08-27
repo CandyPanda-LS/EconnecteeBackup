@@ -223,6 +223,7 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
 
   export const logout = () => (dispatch) => {
     localStorage.removeItem("x-auth-token");
+    localStorage.removeItem("role");
     dispatch({
       type: ACTION_TYPES.LOGOUT,
     });
