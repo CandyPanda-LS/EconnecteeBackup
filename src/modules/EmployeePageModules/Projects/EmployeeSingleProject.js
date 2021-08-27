@@ -4,10 +4,10 @@ import * as actions from "../../../store/actions/EmployeeActions";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import FeedbackForm from "../../ProjectManagerPageModules/Feedback/FeedbackForm/FeedbackForm";
 import DoneTasks from "./DoneTasks";
 import InProgressTasks from "./InProgressTasks";
 import TodoTask from "./TodoTask";
+import EmployeeFeedbackForm from "./EmployeeFeedbackForm";
 
 class EmployeeSingleProject extends Component {
   constructor(props) {
@@ -79,12 +79,12 @@ class EmployeeSingleProject extends Component {
                   {`Project Manager: ${this.state.project.projectManager.name}`}
                 </h1>
 
-                {/* <button
+                <button
                   className="btn sprintTableBtn  mb-3"
                   onClick={this.toggleFeedbackForm}
                 >
                   ADD FEEDBACK
-                </button> */}
+                </button>
               </div>
               {this.state.project.sprintList[0] ? (
                 <>
@@ -109,7 +109,7 @@ class EmployeeSingleProject extends Component {
                   </div>
                 </>
               ) : (
-               <p>No Sprint</p> 
+                <p>No Sprint</p>
               )}
             </div>
             {/* Modals Section */}
@@ -119,10 +119,12 @@ class EmployeeSingleProject extends Component {
               toggle={this.toggleFeedbackForm}
             >
               <ModalHeader toggle={this.toggleFeedbackForm}>
-                Add Feedback
+                Add Employee Feedback
               </ModalHeader>
               <ModalBody>
-                <FeedbackForm />
+                <EmployeeFeedbackForm
+                  sprintId={this.state.project.sprintList[0]._id}
+                />
               </ModalBody>
             </Modal>
 

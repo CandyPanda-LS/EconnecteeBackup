@@ -117,7 +117,7 @@ export default class FeebackTable extends Component {
                           (singleFeedback, index) => {
                             return (
                               <tr>
-                                <td>{++index}</td>
+                                <th scope="row">#{++index}</th>
                                 <td>{singleFeedback.feedback}</td>
                                 <td>
                                   <button className="btn btn-danger empTableBtn">
