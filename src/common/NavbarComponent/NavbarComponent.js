@@ -182,7 +182,7 @@ class NavbarComponent extends Component {
                       <a
                         className="nav-link text-white"
                         aria-current="page"
-                        href="/pmdashboard"
+                        href="/admindashboard"
                       >
                         Home
                       </a>

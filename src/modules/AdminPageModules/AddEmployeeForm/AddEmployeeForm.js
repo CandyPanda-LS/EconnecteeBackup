@@ -53,6 +53,7 @@ export class AddEmployeeForm extends Component {
       this.props.employeeRegister(
         registrationObj,
         () => {
+          document.getElementById("myForm").reset();
           toast.success('Employee Registration Success', {
             autoClose: 1000,
           });
@@ -80,7 +81,7 @@ export class AddEmployeeForm extends Component {
               <h5>EMPLOYEE REGISTRATION !</h5>
             </div>
             <div className="container mt-3">
-              <Form onSubmit={this.onRegistration}>
+              <Form onSubmit={this.onRegistration} id="myForm">
                 <FormGroup className="mt-3">
                   <Input
                     type="text"

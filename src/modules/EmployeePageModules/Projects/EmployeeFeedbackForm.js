@@ -33,6 +33,7 @@ class EmployeeFeedbackForm extends Component {
       this.props.sprintId,
       newFeedback,
       () => {
+        document.getElementById("myForm").reset();
         toast.success("Feedback added", {
           autoClose: 2000,
         });
@@ -52,7 +53,7 @@ class EmployeeFeedbackForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.onCreateFeedback}>
+        <Form onSubmit={this.onCreateFeedback} id="myForm">
           <FormGroup className="mt-2">
             <Label for="sprint">About the Sprint</Label>
             <Input

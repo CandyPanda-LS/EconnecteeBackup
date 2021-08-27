@@ -29,6 +29,7 @@ class CreateSprintForm extends Component {
       newSprint,
       () => {
         this.props.fetchProjectById(this.props.projectId);
+        document.getElementById("myForm").reset();
         toast.success("Sprint created", {
           autoClose: 2500,
         });
@@ -48,7 +49,7 @@ class CreateSprintForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.onCreateSprint}>
+        <Form onSubmit={this.onCreateSprint} id="myForm">
           <FormGroup className="mt-2">
             <Label for="fromDate">Start Date</Label>
             <Input

@@ -29,6 +29,7 @@ class FeedbackForm extends Component {
       newFeedback,
       () => {
         this.props.fetchProjectById(this.props.projectId);
+        document.getElementById("myForm").reset();
         toast.success("Feedback added", {
           autoClose: 2000,
         });
@@ -48,7 +49,7 @@ class FeedbackForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.onCreateFeedback}>
+        <Form onSubmit={this.onCreateFeedback} id="myForm">
           <FormGroup className="mt-2">
             <Label for="sprint">About the Sprint</Label>
             <Input

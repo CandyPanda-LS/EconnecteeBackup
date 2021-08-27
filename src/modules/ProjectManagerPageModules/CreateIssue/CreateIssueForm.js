@@ -45,6 +45,7 @@ class CreateIssueForm extends Component {
       newIssue,
       () => {
         this.props.fetchProjectById(this.props.projectId)
+        document.getElementById("myForm").reset();
         toast.success("Issue Created", {
           autoClose: 1000,
         });
@@ -64,7 +65,7 @@ class CreateIssueForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.onCreateIssue}>
+        <Form onSubmit={this.onCreateIssue} id="myForm">
           <FormGroup className="mt-2">
             <Label for="issueName">Issue Name</Label>
             <Input
