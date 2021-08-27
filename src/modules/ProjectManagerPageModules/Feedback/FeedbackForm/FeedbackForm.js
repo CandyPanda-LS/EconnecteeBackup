@@ -12,7 +12,9 @@ class FeedbackForm extends Component {
     this.onCreateFeedback = this.onCreateFeedback.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.state = {
-      feedback: "",
+      sprint: "",
+      team:"",
+      tasks:""
     };
   }
 
@@ -20,14 +22,14 @@ class FeedbackForm extends Component {
     e.preventDefault();
 
     const newFeedback = {
-      feedback: this.state.feedback,
+      feedback: this.state.sprint + ". " + this.state.team + ". " + this.state.tasks + ".",
     };
     this.props.addFeedback(
       this.props.sprintId,
       newFeedback,
       () => {
         this.props.fetchProjectById(this.props.projectId);
-        toast.success("Issue Created", {
+        toast.success("Feedback added", {
           autoClose: 2000,
         });
       },
@@ -48,14 +50,39 @@ class FeedbackForm extends Component {
       <div>
         <Form onSubmit={this.onCreateFeedback}>
           <FormGroup className="mt-2">
-            <Label for="feedback">Add Feedback</Label>
+            <Label for="sprint">About the Sprint</Label>
             <Input
               type="textarea"
-              name="feedback"
-              id="feedback"
+              name="sprint"
+              id="sprint"
               onChange={(e) => {
                 this.onValueChange(e);
               }}
+              required
+            />
+          </FormGroup>
+          <FormGroup className="mt-2">
+            <Label for="team">About the Team</Label>
+            <Input
+              type="textarea"
+              name="team"
+              id="team"
+              onChange={(e) => {
+                this.onValueChange(e);
+              }}
+              required
+            />
+          </FormGroup>
+          <FormGroup className="mt-2">
+            <Label for="tasks">About Tasks</Label>
+            <Input
+              type="textarea"
+              name="tasks"
+              id="tasks"
+              onChange={(e) => {
+                this.onValueChange(e);
+              }}
+              required
             />
           </FormGroup>
           <FormGroup className="mt-2">
