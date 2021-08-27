@@ -9,6 +9,8 @@ const config = {
 const authEmployeeApi = {
   authEmployee() {
     return {
+      loginWithFaceAuth: (loginEmployee) =>
+      axios.post(`${baseUrl}/api/employee/loginwithfaceauth`, loginEmployee),
       confirmOutTime: (attendenceId,confirmOutTimeObj) => axios.put(`${baseUrl}/api/employee/confirmouttime/${attendenceId}`,confirmOutTimeObj),
       confirmInTime: (employeeId,confirmInTimeObj) => axios.put(`${baseUrl}/api/employee/confirmintime/${employeeId}`,confirmInTimeObj),
       getEmployeeDetails: () => axios.get(baseUrl + "/api/employee",config),

@@ -1,28 +1,44 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/authActions";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import PMLoginFaceAuth from "./PMLoginFaceAuth";
+import EmployeeLoginFaceAuth from "./EmployeeLoginFaceAuth";
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.onLogin = this.onLogin.bind(this);
     this.toggleProjectManagerModal = this.toggleProjectManagerModal.bind(this);
+    this.toggleEmployeeModal = this.toggleEmployeeModal.bind(this);
+    this.toggleAdminModal = this.toggleAdminModal.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.state = {
       email: "",
       password: "",
-      modalProjectManager: false
+      modalProjectManager: false,
+      modalEmployee: false,
     };
   }
 
   toggleProjectManagerModal = () => {
     this.setState({
       modalProjectManager: !this.state.modalProjectManager,
+    });
+  };
+
+  toggleEmployeeModal = () => {
+    this.setState({
+      modalEmployee: !this.state.modalEmployee,
+    });
+  };
+
+  toggleAdminModal = () => {
+    toast.warning("This feature is not available for ADMIN", {
+      autoClose: false,
     });
   };
 
@@ -37,19 +53,18 @@ class LoginForm extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(loginObj)
+    console.log(loginObj);
     if (this.props.role === "EMPLOYEE") {
       this.props.employeeLogin(
         loginObj,
         () => {
-
-          toast.success('Login Success', {
+          toast.success("Login Success", {
             autoClose: false,
           });
           window.location = "/employeedashboard";
         },
         () => {
-          toast.error('Username or password incorrect. Please try again', {
+          toast.error("Username or password incorrect. Please try again", {
             autoClose: false,
           });
         }
@@ -58,13 +73,13 @@ class LoginForm extends Component {
       this.props.adminLogin(
         loginObj,
         () => {
-          toast.success('Login Success', {
+          toast.success("Login Success", {
             autoClose: false,
           });
           window.location = "/admindashboard";
         },
         () => {
-          toast.error('Username or password incorrect. Please try again', {
+          toast.error("Username or password incorrect. Please try again", {
             autoClose: false,
           });
         }
@@ -73,19 +88,18 @@ class LoginForm extends Component {
       this.props.projectManagerLogin(
         loginObj,
         () => {
-          toast.success('Login Success', {
+          toast.success("Login Success", {
             autoClose: false,
           });
           window.location = "/pmdashboard";
         },
         () => {
-          toast.error('Username or password incorrect. Please try again', {
+          toast.error("Username or password incorrect. Please try again", {
             autoClose: false,
           });
         }
       );
     }
-
   }
 
   render() {
@@ -118,20 +132,34 @@ class LoginForm extends Component {
                 }}
               />
             </FormGroup>
-            <a className="text-left" href="/">Forget password?</a>
-            <FormGroup className="mt-2"><Button className="mt-2 loginBtn">Login</Button></FormGroup>
-
+            <a className="text-left" href="/">
+              Forget password?
+            </a>
+            <FormGroup className="mt-2">
+              <Button className="mt-2 loginBtn">Login</Button>
+            </FormGroup>
           </Form>
         </div>
         <div className="mt-2 mb-5">
           <p>or</p>
-          <a href="/">Register Here !</a>
-          {/* <Button className="mt-2 loginBtn" onClick={()=>{
-            this.toggleProjectManagerModal()
-          }}>Login With Face</Button> */}
+          <Button
+            className="mt-2 loginBtn"
+            onClick={() => {
+              this.props.role === "EMPLOYEE"
+                ? this.toggleEmployeeModal()
+                : this.props.role === "PROJECT MANAGER"
+                ? this.toggleProjectManagerModal()
+                : this.toggleAdminModal();
+            }}
+          >
+            Login With Face
+          </Button>
         </div>
+        <hr />
+        <a href="/">Register Here !</a>
+
         <ToastContainer />
-           {/* Modals Section */}
+        {/* Modals Section */}
 
         {/* Login Project Manager Modal */}
         <Modal
@@ -139,10 +167,23 @@ class LoginForm extends Component {
           toggle={this.toggleProjectManagerModal}
         >
           <ModalHeader toggle={this.toggleProjectManagerModal}>
-           PROJECT MANAGER LOGIN
+            PROJECT MANAGER LOGIN
           </ModalHeader>
           <ModalBody>
             <PMLoginFaceAuth />
+          </ModalBody>
+        </Modal>
+
+        {/* Login Employee Modal */}
+        <Modal
+          isOpen={this.state.modalEmployee}
+          toggle={this.toggleEmployeeModal}
+        >
+          <ModalHeader toggle={this.toggleEmployeeModal}>
+            EMPLOYEE LOGIN
+          </ModalHeader>
+          <ModalBody>
+            <EmployeeLoginFaceAuth />
           </ModalBody>
         </Modal>
 
@@ -155,7 +196,7 @@ class LoginForm extends Component {
 const mapActionToProps = {
   employeeLogin: actions.employeeLogin,
   adminLogin: actions.adminLogin,
-  projectManagerLogin: actions.productManagerLogin
+  projectManagerLogin: actions.productManagerLogin,
 };
 
 export default connect(null, mapActionToProps)(LoginForm);

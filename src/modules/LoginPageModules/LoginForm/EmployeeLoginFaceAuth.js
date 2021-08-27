@@ -6,7 +6,7 @@ import Progress from "../../../common/ProgressBar/progress";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/authActions";
 
-function PMLoginFaceAuth(props) {
+function EmployeeLoginFaceAuth(props) {
   //states for webcam
   const webcamRef = React.useRef(null);
   const [imgSrc, setImgSrc] = React.useState("");
@@ -83,7 +83,7 @@ function PMLoginFaceAuth(props) {
 
                   const newUserLogin = {
                     faceId: response.data[0].faceId,
-                    largeFaceListId: "productmanagerlist",
+                    largeFaceListId: "employeelist",
                     maxNumOfCandidatesReturned: 10,
                     mode: "matchPerson",
                   };
@@ -103,10 +103,10 @@ function PMLoginFaceAuth(props) {
                         persistedFaceId: res.data[0].persistedFaceId,
                       };
 
-                      props.productManagerLoginWithFaceAuth(
+                      props.employeeLoginWithFaceAuth(
                         loginObj,
                         () => {
-                          window.location = "/pmdashboard";
+                          window.location = "/employeedashboard";
                         },
                         () => {}
                       );
@@ -159,7 +159,7 @@ function PMLoginFaceAuth(props) {
 
           <div>
             <div class="form-group mt-2 mb-2">
-            <h5>{StateOfProcess}</h5>
+              <h5>{StateOfProcess}</h5>
             </div>
             <div class="form-group">
               <Progress percentage={uploadPercentage} />
@@ -172,7 +172,7 @@ function PMLoginFaceAuth(props) {
 }
 
 const mapActionToProps = {
-  productManagerLoginWithFaceAuth: actions.productManagerLoginWithFaceAuth,
+  employeeLoginWithFaceAuth: actions.employeeLoginWithFaceAuth,
 };
 
-export default connect(null, mapActionToProps)(PMLoginFaceAuth);
+export default connect(null, mapActionToProps)(EmployeeLoginFaceAuth);
