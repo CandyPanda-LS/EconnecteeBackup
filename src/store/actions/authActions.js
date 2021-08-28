@@ -180,7 +180,7 @@ export const adminRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
   
         if (response.data.token) {
           localStorage.setItem("x-auth-token", response.data.token);
-          localStorage.setItem("role","PM");
+          localStorage.setItem("role","EMPLOYEE");
 
         }
         OnSuccess();

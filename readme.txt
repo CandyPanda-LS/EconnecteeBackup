@@ -1,2 +1,2 @@
-https://econnecteeebackend-dev.herokuapp.com
-https://econnecteeebackend.herokuapp.com
+https://econnecteebackend.herokuapp.com
+http://localhost:5000
