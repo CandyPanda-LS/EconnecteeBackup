@@ -132,7 +132,7 @@ class LoginForm extends Component {
                 }}
               />
             </FormGroup>
-            <a className="text-left" href="/">
+            <a className="text-left" href={`/forgotpassword/${this.props.role}`}>
               Forget password?
             </a>
             <FormGroup className="mt-2">

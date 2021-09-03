@@ -1,4 +1,4 @@
-import ForgotPasswordApi  from "../apis/ForgotPasswordApi";
+import ForgotPasswordApi  from "../apis/ForgotPasswordAPI";
 
 export const ACTION_TYPES = {
   SEND_MAIL: "SEND_MAIL",
@@ -8,10 +8,14 @@ export const ACTION_TYPES = {
 };
 
 export const sendResetMail = (email, OnSuccess, OnFailure) => (dispatch) => {
+   console.log(email)
     ForgotPasswordApi
         .forgotPassword()
         .sendMailToReset(email)
         .then(()=>{
+          dispatch({
+            type:ACTION_TYPES.SEND_MAIL,
+        })
             OnSuccess();
         })
         .catch(() => {

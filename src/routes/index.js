@@ -24,6 +24,7 @@ import EvaluateProjectPage from "../pages/ProjectManager/ProjectsPage/EvaluatePr
 import ProjectManagerRegistrationPage from "../pages/ProjectManager/ProjectManagerRegistrationPage/ProjectManagerRegistrationPage";
 import EditProfilePM from "../pages/ProjectManager/EditProfilePage/EditProfilePM";
 import PMAttendencePage from "../pages/ProjectManager/PMAttendencePage/PMAttendencePage";
+import ForgetPasswordForm from "../modules/LoginPageModules/ForgetPassword/ForgetPasswordForm";
 
 export default class index extends Component {
   render() {
@@ -38,9 +39,8 @@ export default class index extends Component {
           ) : localStorage.getItem("role") == "PM" ? (
             <Route path="/" exact component={ProjectManagerDashboardPage} />
           ) : (
-            <Route path="/" exact component={EmployeeLoginPage} /> 
+            <Route path="/" exact component={EmployeeLoginPage} />
           )}
-          
           <Route path="/adminlogin" exact component={AdminLoginPage} />
           <Route
             path="/adminregister"
@@ -110,6 +110,11 @@ export default class index extends Component {
             path="/projectdashboard/:projectid/addmemberproject"
             exact
             component={RecruitEmployeesPage}
+          />
+          <Route
+            path="/forgotpassword/:role"
+            exact
+            component={ForgetPasswordForm}
           />
         </Router>
       </div>
