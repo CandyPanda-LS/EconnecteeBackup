@@ -76,7 +76,7 @@ class EditProfilePM extends Component {
 
     if (this.state.persistedFaceId) {
       await axios.delete(
-        `https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/employeelist/persistedfaces/${this.state.persistedFaceId}`,
+        `https://eastus.api.cognitive.microsoft.com/face/v1.0/largefacelists/productmanagerlist/persistedfaces/${this.state.persistedFaceId}`,
         config
       );
     }
