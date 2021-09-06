@@ -10,6 +10,7 @@ import EditProjectForm from "../EditProjectForm/EditProjectForm";
 
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import ProjectTableHeader from "./ProjectTableHeader";
 
 class AdminProjectsTable extends Component {
   constructor(props) {
@@ -62,8 +63,9 @@ class AdminProjectsTable extends Component {
       <div className="card mt-5 boderRadiusCards">
         <div className="card-body">
           <div className="row">
+          <ProjectTableHeader/>
             <div className="col-md-9">
-              <h5 style={{marginLeft:"20px",marginTop:"10px",fontSize:"20px", fontFamily:"Orbitron"}}>{this.props.projectList.length} Projects</h5>
+              <h5 style={{marginLeft:"20px",marginTop:"10px",fontSize:"20px", fontFamily:"Orbitron"}}>{this.props.filterProjectList.length} Projects</h5>
             </div>
             <div className="col-md-3">
               <button className="btn sprintTableBtn">Generate Report</button>
@@ -83,7 +85,7 @@ class AdminProjectsTable extends Component {
           </div>
           <table className="table table-hover">
             <tbody>
-              {this.props.projectList.map((singleProject) => {
+              {this.props.filterProjectList.map((singleProject) => {
                 return (
                   <tr>
                     <td>
@@ -176,7 +178,7 @@ class AdminProjectsTable extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  projectList: state.projectReducer.projectList,
+  filterProjectList: state.projectReducer.filterProjectList,
 });
 
 const mapActionToProps = {

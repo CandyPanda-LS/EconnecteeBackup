@@ -2,6 +2,7 @@ import { ACTION_TYPES } from "../actions/ProjectActions";
 
 const initialState = {
   projectList: [],
+  filterProjectList:[],
   singleProject: null,
 };
 
@@ -21,6 +22,7 @@ export const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         projectList: [...action.payload],
+        filterProjectList: [...action.payload],
       };
     case ACTION_TYPES.DELETE_PROJECT:
       return {
@@ -34,6 +36,11 @@ export const projectReducer = (state = initialState, action) => {
           x._id === action.payload._id ? action.payload : x
         ),
       };
+      case ACTION_TYPES.FETCH_FILTER_PROJECTS:
+        return {
+          ...state,
+          filterProjectList: [...action.payload],
+        };
     default:
       return state;
   }

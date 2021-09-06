@@ -36,6 +36,7 @@ class AddProjectForm extends Component {
     this.props.addProject(
       newProjectObj,
       () => {
+        document.getElementById("myForm").reset();
         this.props.fetchAllProjectList()
         toast.success("Project Created", {
           autoClose: 1000,
@@ -52,7 +53,7 @@ class AddProjectForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.onAddProject}>
+        <Form onSubmit={this.onAddProject} id="myForm">
           <FormGroup className="mt-2">
             <Label for="projectName">Project Name</Label>
             <Input

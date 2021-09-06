@@ -25,6 +25,7 @@ import ProjectManagerRegistrationPage from "../pages/ProjectManager/ProjectManag
 import EditProfilePM from "../pages/ProjectManager/EditProfilePage/EditProfilePM";
 import PMAttendencePage from "../pages/ProjectManager/PMAttendencePage/PMAttendencePage";
 import ForgetPasswordForm from "../modules/LoginPageModules/ForgetPassword/ForgetPasswordForm";
+import PMTable from "../modules/AdminPageModules/PMTable/PMTable";
 
 export default class index extends Component {
   render() {
@@ -82,6 +83,7 @@ export default class index extends Component {
             exact
             component={ProjectManagerDashboardPage}
           />
+          <Route path="/pmlist" exact component={PMTable} />
           <Route
             path="/projectdashboard/:projectid/sprintbacklog"
             exact

@@ -17,6 +17,16 @@ export default class AdminDashboardCardSection extends Component {
             </Link>
           </div>
           <div className="col-lg-4 p-3">
+            <Link to="/pmlist">
+              <div className="card employeeDashboardCard boderRadiusCards">
+                <div className="card-body employeeDashboardCardOne">
+                 <h5 style={{fontFamily:"Orbitron",fontSize:"30px",color:"#087E8B"}}>Project Managers</h5>
+                  <h5 style={{fontFamily:"Orbitron",fontSize:"30px",color:"#087E8B"}}>management</h5>
+              </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col-lg-4 p-3">
             <Link to="/adminprojectsdashboard">
               <div className="card employeeDashboardCard boderRadiusCards">
                 <div className="card-body employeeDashboardCardTwo">

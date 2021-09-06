@@ -10,6 +10,7 @@ import EditEmployeeForm from "../EditEmployeeForm/EditEmployeeForm";
 
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import EmployeeTableHeader from "./EmployeeTableHeader";
 
 class EmployeeTable extends Component {
   constructor(props) {
@@ -51,7 +52,9 @@ class EmployeeTable extends Component {
     return (
       <div className="card boderRadiusCards shadow-none">
         <div className="card-body empTable">
+        <EmployeeTableHeader/>
           <table className="table table-hover">
+            
             <thead>
               <tr className="empTableHeader">
                 <th scope="col">#</th>
@@ -154,7 +157,7 @@ class EmployeeTable extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  employeeList: state.employeeReducer.employeeList,
+  employeeList: state.employeeReducer.filterEmployeeList,
 });
 
 const mapActionToProps = {

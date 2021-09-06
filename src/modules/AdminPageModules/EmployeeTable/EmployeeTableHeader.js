@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/EmployeeActions";
-import "./SalaryManagementHeader.css";
+import "./EmployeeTableHeader.css"
 
-class SalaryManagementHeader extends Component {
+class EmployeeTableHeader extends Component {
   constructor(props) {
     super(props);
     this.onValueChange = this.onValueChange.bind(this);
@@ -29,16 +29,14 @@ class SalaryManagementHeader extends Component {
     }
   }
 
+
   render() {
     return (
       <div>
-        <div className="row mt-5 SalaryManagementHeader">
-          <div className="col-md-7 p-2">
-            <h3>SALARY MANAGEMENT</h3>
-          </div>
+        <div className="row SalaryManagementHeader">
           <div className="col-md-3 p-2">
             <div class="searchTab">
-              <input
+            <input
                 type="text"
                 placeholder="Search by name.."
                 name="name"
@@ -46,13 +44,7 @@ class SalaryManagementHeader extends Component {
                   this.onValueChange(e);
                 }}
               />
-              <button type="submit">
-                <i class="bi bi-search"></i>
-              </button>
             </div>
-          </div>
-          <div className="col-md-2 p-2">
-            <button className="btn empProjectTableBtn">Generate Report</button>
           </div>
         </div>
       </div>
@@ -70,4 +62,4 @@ const mapActionToProps = {
 export default connect(
   mapStateToProps,
   mapActionToProps
-)(SalaryManagementHeader);
+)(EmployeeTableHeader);

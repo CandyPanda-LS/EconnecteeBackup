@@ -6,6 +6,14 @@ export const ACTION_TYPES = {
   GET_ALL_EMPLOYEES: "GET_ALL_EMPLOYEES",
   DELETE_EMPLOYEE: "DELETE_EMPLOYEE",
   UPDATE_EMPLOYEE: "UPDATE_EMPLOYEE",
+  FETCH_FILTER_EMPLOYEES:"FETCH_FILTER_EMPLOYEES"
+};
+
+export const filterAllEmployees = (data) => (dispatch) => {
+  dispatch({
+    type: ACTION_TYPES.FETCH_FILTER_EMPLOYEES,
+    payload: data,
+  });
 };
 
 export const employeeRegister = (data, OnSuccess, OnFailure) => (dispatch) => {

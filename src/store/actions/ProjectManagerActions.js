@@ -4,7 +4,16 @@ export const ACTION_TYPES = {
   GET_PROJECT_MANAGER:"GET_PROJECT_MANAGER",
   GET_ALL_PROJECT_MANAGERS_LIST: "GET_ALL_PROJECT_MANAGERS_LIST",
   DELETE_PROJECT_MANAGER:"DELETE_PROJECT_MANAGER",
-  UPDATE_PROJECT_MANAGER:"UPDATE_PROJECT_MANAGER"
+  UPDATE_PROJECT_MANAGER:"UPDATE_PROJECT_MANAGER",
+  FETCH_FILTER_PROJECT_MANAGERS:"FETCH_FILTER_PROJECT_MANAGERS"
+};
+
+export const filterAllProjectManagers = (data) => (dispatch) => {
+  console.log(data)
+  dispatch({
+    type: ACTION_TYPES.FETCH_FILTER_PROJECT_MANAGERS,
+    payload: data,
+  });
 };
 
 export const fetchProjectManagerDetails = () => (dispatch) => {

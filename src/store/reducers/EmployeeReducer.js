@@ -1,8 +1,9 @@
 import { ACTION_TYPES } from "../actions/EmployeeActions";
 
 const initialState = {
-  singleEmployee:null,
-  employeeList: []
+  singleEmployee: null,
+  employeeList: [],
+  filterEmployeeList:[]
 };
 
 export const employeeReducer = (state = initialState, action) => {
@@ -12,7 +13,7 @@ export const employeeReducer = (state = initialState, action) => {
         ...state,
         employeeList: [...state.employeeList, action.payload],
       };
-      case ACTION_TYPES.GET_EMPLOYEE:
+    case ACTION_TYPES.GET_EMPLOYEE:
       return {
         ...state,
         singleEmployee: action.payload,
@@ -21,6 +22,7 @@ export const employeeReducer = (state = initialState, action) => {
       return {
         ...state,
         employeeList: [...action.payload],
+        filterEmployeeList: [...action.payload],
       };
     case ACTION_TYPES.DELETE_EMPLOYEE:
       return {
@@ -29,13 +31,18 @@ export const employeeReducer = (state = initialState, action) => {
           (x) => x._id !== action.payload
         ),
       };
-      case ACTION_TYPES.UPDATE_EMPLOYEE:
-        return {
-          ...state,
-          employeeList: state.employeeList.map((x) =>
-            x._id === action.payload._id ? action.payload : x
-          ),
-        };
+    case ACTION_TYPES.UPDATE_EMPLOYEE:
+      return {
+        ...state,
+        employeeList: state.employeeList.map((x) =>
+          x._id === action.payload._id ? action.payload : x
+        ),
+      };
+    case ACTION_TYPES.FETCH_FILTER_EMPLOYEES:
+      return {
+        ...state,
+        filterEmployeeList: [...action.payload],
+      };
     default:
       return state;
   }

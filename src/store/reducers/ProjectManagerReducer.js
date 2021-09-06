@@ -2,6 +2,7 @@ import { ACTION_TYPES } from "../actions/ProjectManagerActions";
 
 const initialState = {
   projectManagerList: [],
+  filterProjectManagersList: [],
   singleProjectManager: null,
 };
 
@@ -16,6 +17,7 @@ export const projectManagerReducer = (state = initialState, action) => {
       return {
         ...state,
         projectManagerList: [...action.payload],
+        filterProjectManagersList: [...action.payload],
       };
     case ACTION_TYPES.DELETE_PROJECT_MANAGER:
       return {
@@ -30,6 +32,11 @@ export const projectManagerReducer = (state = initialState, action) => {
         projectManagerList: state.projectManagerList.map((x) =>
           x._id === action.payload._id ? action.payload : x
         ),
+      };
+    case ACTION_TYPES.FETCH_FILTER_PROJECT_MANAGERS:
+      return {
+        ...state,
+        filterProjectManagersList: [...action.payload],
       };
     default:
       return state;

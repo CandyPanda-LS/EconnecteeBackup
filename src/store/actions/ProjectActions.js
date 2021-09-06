@@ -5,7 +5,15 @@ export const ACTION_TYPES = {
   GET_SINGLE_PROJECT:"GET_SINGLE_PROJECT",
   GET_ALL_PROJECTS: "GET_ALL_PROJECTS",
   DELETE_PROJECT:"DELETE_PROJECT",
-  UPDATE_PROJECT:"UPDATE_PROJECT"
+  UPDATE_PROJECT:"UPDATE_PROJECT",
+  FETCH_FILTER_PROJECTS:"FETCH_FILTER_PROJECTS"
+};
+
+export const filterAllProjects = (data) => (dispatch) => {
+  dispatch({
+    type: ACTION_TYPES.FETCH_FILTER_PROJECTS,
+    payload: data,
+  });
 };
 
 export const addProject = (data, OnSuccess, OnFailure) => (dispatch) => {
