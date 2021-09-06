@@ -5,15 +5,17 @@ import "./PMTable.css";
 import ProfileImage from "../../../assets/images/profile.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import PMTableHeader from "./PMTableHeader";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 
 class PMTable extends Component {
   constructor(props) {
     super(props);
     this.onRemoveEmployee = this.onRemoveEmployee.bind(this);
+    this.printDocument = this.printDocument.bind(this);
     this.state = {
       modalEditEmployee: false,
       singleEmployeeObject: null,
@@ -40,6 +42,19 @@ class PMTable extends Component {
     );
   }
 
+  printDocument() {
+    const doc = new jsPDF();
+    var col = ["No", "Username", "Name", "Email"];
+    var rows = [];
+    this.props.filterProjectManagersList.forEach((element, index) => {
+      var temp = [++index, element.username, element.name, element.email];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows, { startY: 10 });
+    doc.save("ProjectManagerReport.pdf");
+  }
+
   render() {
     return (
       <div className="container">
@@ -49,9 +64,17 @@ class PMTable extends Component {
         >
           <span className="display-1">PROJECT MANAGER LIST</span>
         </div>
-        <div className="card boderRadiusCards shadow-none">
+        <div className="card boderRadiusCards shadow-none" id="divToPrint">
           <div className="card-body empTable">
-            <PMTableHeader />
+            <div className="row">
+              <div className="col-md-10">
+                <PMTableHeader />
+              </div>
+              <div className="col-md-2">
+                <button onClick={this.printDocument} className="btn sprintTableBtn">Generate Report</button>
+              </div>
+            </div>
+
             <table className="table table-hover">
               <thead>
                 <tr className="empTableHeader">

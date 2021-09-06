@@ -6,19 +6,19 @@ import "react-toastify/dist/ReactToastify.css";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import AddProjectForm from "../AddProjectForm/AddProjectForm";
 import EditProjectForm from "../EditProjectForm/EditProjectForm";
-
-
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import ProjectTableHeader from "./ProjectTableHeader";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 
 class AdminProjectsTable extends Component {
   constructor(props) {
     super(props);
-
     this.toggleCreateProject = this.toggleCreateProject.bind(this);
+    this.printDocument = this.printDocument.bind(this);
     this.toggleEditProject = this.toggleEditProject.bind(this);
-
+    
     this.state = {
       modalCreateProject: false,
       modalEditProject: false,
@@ -41,6 +41,19 @@ class AdminProjectsTable extends Component {
       modalEditProject: !this.state.modalEditProject,
     });
   };
+
+  printDocument = () => {
+    const doc = new jsPDF();
+    var col = ["No", "Id", "Project Name", "Project Manager"];
+    var rows = [];
+    this.props.filterProjectList.forEach((element, index) => {
+      var temp = [++index, element._id, element.projectName, element.projectManager.name];
+      rows.push(temp);
+    });
+
+    doc.autoTable(col, rows, { startY: 10 });
+    doc.save("ProjectReport.pdf");
+  }
 
   onRemoveProject(projectId) {
     this.props.deleteProject(
@@ -68,7 +81,7 @@ class AdminProjectsTable extends Component {
               <h5 style={{marginLeft:"20px",marginTop:"10px",fontSize:"20px", fontFamily:"Orbitron"}}>{this.props.filterProjectList.length} Projects</h5>
             </div>
             <div className="col-md-3">
-              <button className="btn sprintTableBtn">Generate Report</button>
+              <button className="btn sprintTableBtn" onClick={this.printDocument}>Generate Report</button>
               <button
                 className="btn sprintTableBtn"
                 onClick={this.toggleCreateProject}

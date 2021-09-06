@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/ProjectActions";
 import "./ProjectTableHeader.css";
 
+
 class ProjectTableHeader extends Component {
   constructor(props) {
     super(props);
@@ -29,11 +30,14 @@ class ProjectTableHeader extends Component {
     }
   }
 
+
+
+
   render() {
     return (
       <div>
         <div className="row SalaryManagementHeader">
-          <div className="col-md-3 p-2">
+          <div className="col-md-9 p-2">
             <div class="searchTab">
               <input
                 type="text"
