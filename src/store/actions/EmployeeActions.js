@@ -3,6 +3,7 @@ import employeeAPI from "../apis/EmployeeAPI";
 export const ACTION_TYPES = {
   ADD_EMPLOYEE: "ADD_EMPLOYEE",
   GET_EMPLOYEE: "GET_EMPLOYEE",
+  GET_EMPLOYEE_BY_ID:"GET_EMPLOYEE_BY_ID",
   GET_ALL_EMPLOYEES: "GET_ALL_EMPLOYEES",
   DELETE_EMPLOYEE: "DELETE_EMPLOYEE",
   UPDATE_EMPLOYEE: "UPDATE_EMPLOYEE",
@@ -33,7 +34,6 @@ export const employeeRegister = (data, OnSuccess, OnFailure) => (dispatch) => {
 };
 
 export const fetchEmployee = (OnSuccess) => (dispatch) => {
-  console.log("fetch employee");
   employeeAPI
     .authEmployee()
     .getEmployeeDetails()
@@ -43,6 +43,21 @@ export const fetchEmployee = (OnSuccess) => (dispatch) => {
         payload: response.data,
       });
       OnSuccess();
+    })
+    .catch(() => {
+    });
+};
+
+export const fetchEmployeeById = (employeeId, OnSuccess) => (dispatch) => {
+  employeeAPI
+    .authEmployee()
+    .getEmployeeDetailsById(employeeId)
+    .then((response) => {
+      dispatch({
+        type: ACTION_TYPES.GET_EMPLOYEE_BY_ID,
+        payload: response.data,
+      });
+      OnSuccess()
     })
     .catch(() => {
     });

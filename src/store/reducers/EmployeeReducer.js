@@ -2,8 +2,9 @@ import { ACTION_TYPES } from "../actions/EmployeeActions";
 
 const initialState = {
   singleEmployee: null,
+  singleEmployeeById:null,
   employeeList: [],
-  filterEmployeeList:[]
+  filterEmployeeList: [],
 };
 
 export const employeeReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ export const employeeReducer = (state = initialState, action) => {
       return {
         ...state,
         singleEmployee: action.payload,
+      };
+    case ACTION_TYPES.GET_EMPLOYEE_BY_ID:
+      return {
+        ...state,
+        singleEmployeeById: action.payload,
       };
     case ACTION_TYPES.GET_ALL_EMPLOYEES:
       return {

@@ -6,8 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import AddProjectForm from "../AddProjectForm/AddProjectForm";
 import EditProjectForm from "../EditProjectForm/EditProjectForm";
-import { confirmAlert } from 'react-confirm-alert'; 
-import 'react-confirm-alert/src/react-confirm-alert.css';
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import ProjectTableHeader from "./ProjectTableHeader";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
@@ -18,7 +18,7 @@ class AdminProjectsTable extends Component {
     this.toggleCreateProject = this.toggleCreateProject.bind(this);
     this.printDocument = this.printDocument.bind(this);
     this.toggleEditProject = this.toggleEditProject.bind(this);
-    
+
     this.state = {
       modalCreateProject: false,
       modalEditProject: false,
@@ -47,13 +47,18 @@ class AdminProjectsTable extends Component {
     var col = ["No", "Id", "Project Name", "Project Manager"];
     var rows = [];
     this.props.filterProjectList.forEach((element, index) => {
-      var temp = [++index, element._id, element.projectName, element.projectManager.name];
+      var temp = [
+        ++index,
+        element._id,
+        element.projectName,
+        element.projectManager.name,
+      ];
       rows.push(temp);
     });
 
     doc.autoTable(col, rows, { startY: 10 });
     doc.save("ProjectReport.pdf");
-  }
+  };
 
   onRemoveProject(projectId) {
     this.props.deleteProject(
@@ -76,25 +81,38 @@ class AdminProjectsTable extends Component {
       <div className="card mt-5 boderRadiusCards">
         <div className="card-body">
           <div className="row">
-          <ProjectTableHeader/>
+            <ProjectTableHeader />
             <div className="col-md-9">
-              <h5 style={{marginLeft:"20px",marginTop:"10px",fontSize:"20px", fontFamily:"Orbitron"}}>{this.props.filterProjectList.length} Projects</h5>
+              <h5
+                style={{
+                  marginLeft: "20px",
+                  marginTop: "10px",
+                  fontSize: "20px",
+                  fontFamily: "Orbitron",
+                }}
+              >
+                {this.props.filterProjectList.length} Projects
+              </h5>
             </div>
             <div className="col-md-3">
-              <button className="btn sprintTableBtn" onClick={this.printDocument}>Generate Report</button>
+              <button
+                className="btn sprintTableBtn"
+                onClick={this.printDocument}
+              >
+                Generate Report
+              </button>
               <button
                 className="btn sprintTableBtn"
                 onClick={this.toggleCreateProject}
               >
                 Create
               </button>
-              
             </div>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
             <hr />
-            <br/>
+            <br />
           </div>
           <table className="table table-hover">
             <tbody>
@@ -127,22 +145,22 @@ class AdminProjectsTable extends Component {
                         className="btn btn-danger empTableBtn"
                         onClick={() => {
                           confirmAlert({
-                            title: 'Confirm to delete',
-                            message: 'Are you sure you want to delete the project',
+                            title: "Confirm to delete",
+                            message:
+                              "Are you sure you want to delete the project",
                             buttons: [
                               {
-                                label: 'Yes',
-                                onClick: () => this.onRemoveProject(singleProject._id)
-                              }
+                                label: "Yes",
+                                onClick: () =>
+                                  this.onRemoveProject(singleProject._id),
+                              },
                               // ,
                               // {
                               //   label: 'No',
-                                
-                              // }
-                            ]
-                          });
 
-                          
+                              // }
+                            ],
+                          });
                         }}
                       >
                         <i class="bi bi-trash-fill"></i>
@@ -153,7 +171,6 @@ class AdminProjectsTable extends Component {
               })}
             </tbody>
           </table>
-          
         </div>
         <ToastContainer />
         {/* Modals Section */}

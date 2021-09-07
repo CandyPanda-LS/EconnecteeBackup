@@ -64,7 +64,7 @@ export default class index extends Component {
             component={EmployeeSingleProject}
           />
           <Route
-            path="/evaluateemployee"
+            path="/projectdashboard/:projectid/evaluateemployee"
             exact
             component={EvaluateEmployeePage}
           />

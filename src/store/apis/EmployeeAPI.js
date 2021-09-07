@@ -14,6 +14,7 @@ const authEmployeeApi = {
       confirmOutTime: (attendenceId,confirmOutTimeObj) => axios.put(`${baseUrl}/api/employee/confirmouttime/${attendenceId}`,confirmOutTimeObj),
       confirmInTime: (employeeId,confirmInTimeObj) => axios.put(`${baseUrl}/api/employee/confirmintime/${employeeId}`,confirmInTimeObj),
       getEmployeeDetails: () => axios.get(baseUrl + "/api/employee",config),
+      getEmployeeDetailsById: (employeeId) => axios.get(`${baseUrl}/api/employee/${employeeId}`),
       fetchAllEmployeeList: () => axios.get(baseUrl + "/api/employee/all"),
       deleteEmployee: (employeeId) => axios.delete(baseUrl + "/api/employee/" +employeeId ),
       updateEmployee: (employeeId,updateEmployeeDetails) =>

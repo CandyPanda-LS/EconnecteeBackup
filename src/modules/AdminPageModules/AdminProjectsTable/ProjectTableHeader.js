@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/ProjectActions";
 import "./ProjectTableHeader.css";
 
-
 class ProjectTableHeader extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +14,6 @@ class ProjectTableHeader extends Component {
   }
 
   async onValueChange(e) {
-   
     await this.setState({ [e.target.name]: e.target.value });
     this.props.filterAllProjects(
       this.props.projectList.filter(this.checkProjectByName)
@@ -24,14 +22,13 @@ class ProjectTableHeader extends Component {
 
   checkProjectByName(list) {
     if (this.state.projectName !== "") {
-      return list.projectName.toLowerCase().includes(this.state.projectName.toLowerCase());
+      return list.projectName
+        .toLowerCase()
+        .includes(this.state.projectName.toLowerCase());
     } else {
       return list;
     }
   }
-
-
-
 
   render() {
     return (
@@ -65,7 +62,4 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = {
   filterAllProjects: actions.filterAllProjects,
 };
-export default connect(
-  mapStateToProps,
-  mapActionToProps
-)(ProjectTableHeader);
+export default connect(mapStateToProps, mapActionToProps)(ProjectTableHeader);
